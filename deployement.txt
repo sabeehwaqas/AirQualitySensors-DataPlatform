@@ -14,7 +14,15 @@ RUN TERMIAL: chmod +x bootstrap.sh run_producers.sh teardown.sh
   2.1 see consumer quey:
     RUN TERMIAL: docker exec -it broker bash -lc '/opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic tenantA.bronze.raw --from-beginning'
     RUN TERMIAL: docker exec -it broker bash -lc '/opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic tenantB.bronze.raw --from-beginning'
-
+  2.3 another see consumer with partiion:
+      docker exec -it broker bash -lc '
+/opt/kafka/bin/kafka-console-consumer.sh \
+  --bootstrap-server localhost:9092 \
+  --topic tenantA.bronze.raw \
+  --max-messages 10 \
+  --property print.key=true \
+  --property print.partition=true
+'
 
 3. run producers for both tenants
     RUN TERMIAL: ./run_producers.sh
