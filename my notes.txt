@@ -1,0 +1,241 @@
+Here’s a detailed, “remember-it-later” explanation of **tenant producer data** and **Kafka partitioning**, written around *your* setup (air-quality API → 2 tenant producers → Kafka topics per tenant → partitions → later Flink).
+
+---
+
+## 1) What “tenant producer data” means in your platform
+
+A **tenant producer** is the component that turns a tenant’s raw source into **Kafka messages**.
+
+In your case the raw source is:
+
+* Sensor.Community API (`https://data.sensor.community/static/v2/data.json`)
+
+Your producer does 4 jobs:
+
+1. **Fetch** a record (HTTP GET)
+2. **Transform** it into the tenant’s message schema (“message structure”)
+3. **Attach routing info** (topic + key)
+4. **Publish** to Kafka
+
+### Why two producers / tenants?
+
+Because your platform is multi-tenant. Each tenant:
+
+* can have a different schema (fields, types, nesting)
+* can have different semantics (what does P1/P2 mean, naming conventions, extra derived metrics, etc.)
+* writes into separate bronze tables and can have separate workloads
+
+This exactly satisfies: “tenants develop message structures”.
+
+---
+
+## 2) Tenant A vs Tenant B message structure (what you should enforce)
+
+### Tenant A message style (typical “flat analytics event”)
+
+* Flatten location fields (`lat`, `lon`, `country`)
+* Extract important measures (`P1`, `P2`) into fixed columns
+* Keep a small raw map for traceability
+
+Example (simplified):
+
+```json
+{
+  "tenant_id": "tenantA",
+  "timestamp": "2026-02-26 22:05:03",
+  "location_id": 49,
+  "lat": 48.53,
+  "lon": 9.2,
+  "sensor_id": 107,
+  "pm10_P1": 84.76,
+  "pm2_5_P2": 14.30,
+  "source": "sensor.community/v2"
+}
+```
+
+**Why this is good:** easy to query later in Cassandra / silver.
+
+---
+
+### Tenant B message style (more “telemetry envelope”)
+
+* Put metadata under `meta`
+* Keep measurements as a map
+* Include computed values (epoch timestamp, tags)
+* Keep geo info grouped
+
+Example (simplified):
+
+```json
+{
+  "tenant_id": "tenantB",
+  "meta": {
+    "event_id": 28386647166,
+    "ts_epoch": 1772143503,
+    "source": "sensor.community"
+  },
+  "geo": {
+    "location_id": 49,
+    "country": "DE"
+  },
+  "device": {
+    "sensor_id": 107,
+    "type": "PPD42NS"
+  },
+  "measurements": {
+    "P1": "84.76",
+    "P2": "14.30",
+    "ratioP1": "0.16"
+  }
+}
+```
+
+**Why this is good:** flexible structure, easy to add new sensor fields.
+
+---
+
+## 3) What exactly is Kafka “partitioning” and why you need it
+
+### Topic vs Partition
+
+* A **topic** is the stream name: `tenantA.bronze.raw`
+* A topic is split into **partitions**: partition 0..5 (if you created 6 partitions)
+
+Each partition is an ordered log:
+
+* message 0,1,2,3,… (offsets)
+* ordering is guaranteed **within a partition**, not across partitions
+
+---
+
+## 4) Why partitions matter for your assignment
+
+Partitions give you:
+
+1. **Parallelism**
+   Multiple consumers can read partitions in parallel.
+
+   * With 6 partitions, you can have up to 6 parallel consumer tasks for that topic.
+2. **Scaling / under-provisioning demo**
+   Under heavy load, lag grows. Then you scale consumers (more workers / more Flink parallelism).
+3. **Ordering guarantees**
+   If you want “sensor 107 events in correct order”, you keep them in same partition.
+
+This helps your Part 1 performance tests and heavy-load requirement.
+
+---
+
+## 5) How Kafka chooses which partition a message goes to
+
+### Case A: You provide a message **key** (recommended)
+
+Kafka hashes the key and selects a partition deterministically:
+
+* Same key → always same partition (good for per-sensor ordering)
+* Different keys → spread across partitions (good for throughput)
+
+In your producer, you used keys like:
+
+* tenantA: `sensor_id`
+* tenantB: `location_id`
+
+This is correct.
+
+✅ Benefits:
+
+* ordering per sensor/location is preserved
+* data naturally distributes when keys vary
+
+---
+
+### Case B: You send messages with **no key**
+
+Kafka will round-robin partitions (or sticky partitioning depending on client).
+This spreads load but loses ordering for a particular sensor.
+
+For your project, **always use a key**.
+
+---
+
+## 6) Choosing a good partition key (very important)
+
+A good key has two properties:
+
+1. **Stable**: same entity always has the same key (sensor_id, location_id)
+2. **High cardinality**: many different values exist, so messages spread across partitions
+
+### Good keys for your dataset
+
+* `sensor.id` (best)
+* `location.id` (also good)
+* composite like `country + sensor_id` (if needed)
+
+### Bad keys (avoid)
+
+* `tenant_id` (all events go to ONE partition → no parallelism)
+* constant values like `"107"` if the API keeps returning the same sensor
+
+---
+
+## 7) One issue in your current test (and how to fix)
+
+Your output shows key = `107` repeatedly, meaning you’re likely fetching the same sensor frequently.
+
+That will:
+
+* always go to **one partition**
+* make it look like partitioning “isn’t working”
+
+### Fix: make the key vary for testing (only for stress tests)
+
+You can do one of these:
+
+* fetch multiple objects from API (not just `data[0]`)
+* randomly pick from the list: `random.choice(data)`
+* or in test mode: append a random salt to key
+
+**Best real approach:** choose a random element from the list so sensor_id changes naturally.
+
+---
+
+## 8) How to prove partitioning in your report (easy evidence)
+
+Use console consumer with partition printing:
+
+```bash
+docker exec -it broker bash -lc '
+/opt/kafka/bin/kafka-console-consumer.sh \
+  --bootstrap-server localhost:9092 \
+  --topic tenantA.bronze.raw \
+  --from-beginning \
+  --max-messages 10 \
+  --property print.key=true \
+  --property print.partition=true
+'
+```
+
+You should see different partition numbers **if your key varies**.
+
+---
+
+## 9) How partitions connect to Flink later
+
+Flink Kafka source parallelism typically aligns with partitions:
+
+* If topic has 6 partitions, Flink can run with parallelism up to 6 for that source
+* Each parallel task reads one or more partitions
+* Scaling Flink parallelism = processing more partitions simultaneously
+
+That’s your story for “parallelism” and “under-provisioning”.
+
+---
+
+## Summary (cheat sheet)
+
+* **Tenants differ** by message schema + topic + bronze table + pipeline configs
+* Producer does: API → transform to tenant schema → publish to tenant topic
+* **Partitions** = parallel lanes inside a topic
+* Always use a **key** (sensor_id/location_id) for deterministic partitioning + ordering
+* To *demonstrate* partitioning, ensure keys vary (pick random object from API list)
+
+If you want, I can modify your two producer scripts so they fetch a **random element** from the API list (so partitioning becomes obvious immediately), and add a `TEST_MODE=true` flag for heavy load.

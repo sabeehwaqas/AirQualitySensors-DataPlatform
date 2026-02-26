@@ -1,0 +1,76 @@
+intall python
+instal docker
+make sure docker demon is up
+thenn run 
+docker compose up -d
+docker logs -f kafka
+
+Create your tenant topics (6 partitions each):
+docker exec -it broker bash -lc '
+/opt/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 --create --topic tenantA.bronze.raw --partitions 6 --replication-factor 1 &&
+/opt/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 --create --topic tenantB.bronze.raw --partitions 6 --replication-factor 1
+'
+
+verify:
+docker exec -it broker bash -lc '/opt/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 --list'
+
+install:
+pip install requests confluent-kafka
+
+___
+Step 4 — Two tenant producers (different “message structure”)
+We’ll build two producers that both poll the Sensor.Community API, but publish different schemas to different topics:
+Tenant A: flat, analytics-friendly fields (P1/P2 extracted, location flattened)
+Tenant B: nested-ish payload + computed fields (epoch time, ratios map, source tags)
+Also: we’ll use a message key for partitioning (e.g., sensor_id or location_id) so Kafka distributes data across partitions predictably.
+Put these in a folder like producers/tenantA_producer.py and producers/tenantB_producer.py.
+___
+__
+confirm docker container name: docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Ports}}"
+__
+
+check topic exist: docker exec -it broker bash -lc '/opt/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 --list'
+
+desc partitioning:
+docker exec -it broker bash -lc '/opt/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 --describe --topic tenantA.bronze.raw'
+docker exec -it broker bash -lc '/opt/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 --describe --topic tenantB.bronze.raw'
+
+start consmuer:
+docker exec -it broker bash -lc '/opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic tenantA.bronze.raw --from-beginning'
+docker exec -it broker bash -lc '/opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic tenantB.bronze.raw --from-beginning'
+
+
+run producer code:
+python3 tenantA_producer.py
+
+
+
+__
+
+restart docekr:
+docker compose down -v
+docker compose up -d
+docker logs -f broker
+__
+
+
+
+____
+_____
+_____
+
+1. make them executed able:
+chmod +x bootstrap.sh run_producers.sh teardown.sh
+
+
+2. deploye kafka
+./bootstrap.sh
+
+3. run producers for both tenants
+./run_producers.sh
+
+999. shutdown and delete kafka
+./teardown.sh          # keeps volumes
+    OR
+./teardown.sh --volumes  # wipes Kafka data
+

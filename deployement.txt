@@ -1,0 +1,30 @@
+
+0. Install python 3.x
+0. Install docker
+0. Run dokcer demon
+0. cd to the code folder
+
+1. make them executed able:
+RUN TERMIAL: chmod +x bootstrap.sh run_producers.sh teardown.sh
+
+
+2. deploye kafka
+./bootstrap.sh
+
+  2.1 see consumer quey:
+    RUN TERMIAL: docker exec -it broker bash -lc '/opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic tenantA.bronze.raw --from-beginning'
+    RUN TERMIAL: docker exec -it broker bash -lc '/opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic tenantB.bronze.raw --from-beginning'
+
+
+3. run producers for both tenants
+    RUN TERMIAL: ./run_producers.sh
+ 
+  3.1 to kill producer:
+    RUN TERMIAL: kill $(cat logs/tenantA_producer.pid) $(cat logs/tenantB_producer.pid)
+
+
+999. shutdown and delete kafka
+    RUN TERMIAL: ./teardown.sh          # keeps volumes
+        OR
+    RUN TERMIAL: ./teardown.sh --volumes  # wipes Kafka data
+
