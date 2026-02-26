@@ -55,7 +55,7 @@ __
 
 
 
-____
+_____
 _____
 _____
 
@@ -66,8 +66,18 @@ chmod +x bootstrap.sh run_producers.sh teardown.sh
 2. deploye kafka
 ./bootstrap.sh
 
+2.1 see consumer quey:
+docker exec -it broker bash -lc '/opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic tenantA.bronze.raw --from-beginning'
+docker exec -it broker bash -lc '/opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic tenantB.bronze.raw --from-beginning'
+
+
+
 3. run producers for both tenants
 ./run_producers.sh
+ 
+ 3.1 to kill producer:
+  kill $(cat logs/tenantA_producer.pid) $(cat logs/tenantB_producer.pid)
+
 
 999. shutdown and delete kafka
 ./teardown.sh          # keeps volumes
