@@ -132,8 +132,12 @@ def start_workers(tenant_id: str, req: StartReq):
                 "MONITOR_URL": MONITOR_URL,
                 "REPORT_WINDOW_SEC": REPORT_WINDOW_SEC,
             },
+                # Limit CPU to 0.5 (50% of 1 CPU) and Memory to 256MB <----------- TO test under-provisioned worker
+               # mem_limit="256m",
+               # cpu_quota=50000,  # 50% of 1 CPU
         )
         cid = c.id
+        
 
     state = load_state()
     state["workers"].setdefault(tenant_id, {})

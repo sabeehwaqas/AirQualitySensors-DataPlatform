@@ -21,7 +21,7 @@ HEADERS = {
     "User-Agent": "airq-streaming-platform/0.1 (contact: sabeeh.waqas@aalto.fi)"
 }
 
-POLL_INTERVAL_SEC = 2
+POLL_INTERVAL_SEC = 0.1
 FETCH_TIMEOUT_SEC = 20
 MAX_FETCH_ATTEMPTS = 5
 
