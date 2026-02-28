@@ -47,8 +47,8 @@ def parse_tenantB(payload_str: str) -> Dict[str, Any]:
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--tenant", required=True, choices=["tenantA", "tenantB"])
-    parser.add_argument("--kafka", default="localhost:9092")
-    parser.add_argument("--cassandra", default="127.0.0.1")
+    parser.add_argument("--kafka", default="broker:9092")
+    parser.add_argument("--cassandra", default="cassandra")
     parser.add_argument("--group", default=None)
     args = parser.parse_args()
 

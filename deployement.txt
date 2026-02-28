@@ -3,6 +3,7 @@
 0. Install docker
 0. Run dokcer demon
 0. cd to the code folder
+0. install pip install confluent-kafka cassandra-driver
 
 1. make them executed able:
 RUN TERMIAL: chmod +x bootstrap.sh run_producers.sh teardown.sh
@@ -16,13 +17,13 @@ RUN TERMIAL: chmod +x bootstrap.sh run_producers.sh teardown.sh
     RUN TERMIAL: docker exec -it broker bash -lc '/opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic tenantB.bronze.raw --from-beginning'
   2.3 another see consumer with partiion:
       docker exec -it broker bash -lc '
-/opt/kafka/bin/kafka-console-consumer.sh \
-  --bootstrap-server localhost:9092 \
-  --topic tenantA.bronze.raw \
-  --max-messages 10 \
-  --property print.key=true \
-  --property print.partition=true
-'
+        /opt/kafka/bin/kafka-console-consumer.sh \
+      --bootstrap-server localhost:9092 \
+      --topic tenantA.bronze.raw \
+      --max-messages 10 \
+      --property print.key=true \
+      --property print.partition=true
+        '
 
 3. run producers for both tenants
     RUN TERMIAL: ./run_producers.sh
@@ -30,9 +31,34 @@ RUN TERMIAL: chmod +x bootstrap.sh run_producers.sh teardown.sh
   3.1 to kill producer:
     RUN TERMIAL: kill $(cat logs/tenantA_producer.pid) $(cat logs/tenantB_producer.pid)
 
+  3.2 see topic(queue) : 
+    RUN TERMINAL: docker exec -it broker bash -lc "/opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic tenantA.bronze.raw --from-beginning"
+
+
+
+4.Start TenantA worker and Start TenantB worker:
+  RUN IN TERMINAL: curl -X POST http://localhost:8001/tenants/tenantA/workers/start -H "Content-Type: application/json" -d '{}'
+  RUN IN TERMINAL:curl -X POST http://localhost:8001/tenants/tenantB/workers/start -H "Content-Type: application/json" -d '{}'
+
+  4.1 List workers:
+     RUN IN TERMINAL:curl http://localhost:8001/tenants/tenantA/workers
+
+  4.2 Stop all TenantA workers:
+     RUN IN TERMINAL:curl -X POST http://localhost:8001/tenants/tenantA/workers/stop -H "Content-Type: application/json" -d '{}'
+
+  4.3 View worker logs
+    Since workers are separate containers:
+     RUN IN TERMINAL:docker ps | grep streamingestworker
+     RUN IN TERMINAL:docker logs -f streamingestworker-tenantA-worker-1
+
+5. to go into cassandra cqlsh to see data 
+     RUN IN TERMINAL:docker exec -it cqlsh cqlsh cassandra 9042
 
 999. shutdown and delete kafka
     RUN TERMIAL: ./teardown.sh          # keeps volumes
         OR
     RUN TERMIAL: ./teardown.sh --volumes  # wipes Kafka data
+
+
+
 

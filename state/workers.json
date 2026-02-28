@@ -1,0 +1,56 @@
+{
+  "workers": {
+    "tenantA": {
+      "tenantA-worker-1": {
+        "container_name": "streamingestworker-tenantA-worker-1",
+        "container_id": "fb04026649bb1b43cd9ff97d97eb2803cbac61146678139b68433d07491a9947",
+        "status": "running",
+        "started_at": 1772313036,
+        "kafka": "broker:9092",
+        "cassandra": "cassandra"
+      },
+      "tenantA-worker-2": {
+        "container_name": "streamingestworker-tenantA-worker-2",
+        "container_id": "a01d6997dc0301a171f408177f59bb249c2eb2012dae2c40b443eff20077aef2",
+        "status": "running",
+        "started_at": 1772313164,
+        "kafka": "broker:9092",
+        "cassandra": "cassandra"
+      },
+      "tenantA-worker-3": {
+        "container_name": "streamingestworker-tenantA-worker-3",
+        "container_id": "e5dc4c09ea00a3adde386c64442f6c732d66666d526743a21ccf55a86568870e",
+        "status": "running",
+        "started_at": 1772313173,
+        "kafka": "broker:9092",
+        "cassandra": "cassandra"
+      },
+      "tenantA-worker": {
+        "container_name": "streamingestworker-tenantA",
+        "container_id": "3bd3a749376347a52645be17ff8d9fe687851cb898c7a4e2cd829deec6ca9805",
+        "status": "running",
+        "started_at": 1772314824,
+        "kafka": "broker:29092",
+        "cassandra": "cassandra"
+      }
+    },
+    "tenantB": {
+      "tenantB-worker-1": {
+        "container_name": "streamingestworker-tenantB-worker-1",
+        "container_id": "451df2505cee4a84cf8a6f88a6c4e9a215f554363db1fa58c1f56229b66ff695",
+        "status": "running",
+        "started_at": 1772313050,
+        "kafka": "broker:9092",
+        "cassandra": "cassandra"
+      },
+      "tenantB-worker": {
+        "container_name": "streamingestworker-tenantB",
+        "container_id": "51bcf522a391132adbe4bf29dd5d365922426fbb6f91a3742ed7f75ac5eb1968",
+        "status": "running",
+        "started_at": 1772314824,
+        "kafka": "broker:29092",
+        "cassandra": "cassandra"
+      }
+    }
+  }
+}
