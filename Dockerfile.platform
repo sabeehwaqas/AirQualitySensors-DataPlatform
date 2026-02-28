@@ -3,20 +3,18 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
-# System deps (optional but nice to have)
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
   && rm -rf /var/lib/apt/lists/*
 
-# Python deps
 COPY requirements.platform.txt /app/requirements.platform.txt
 RUN pip install --no-cache-dir -r /app/requirements.platform.txt
 
-# App code
 COPY streamingestworker.py /app/streamingestworker.py
 COPY streamingestmanager.py /app/streamingestmanager.py
+COPY streamingestmonitor.py /app/streamingestmonitor.py
 
-# Create dirs
 RUN mkdir -p /app/state /app/logs
 
 EXPOSE 8001
+EXPOSE 8002

@@ -3,3 +3,4 @@ uvicorn
 docker
 confluent-kafka
 cassandra-driver
+requests

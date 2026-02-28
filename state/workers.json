@@ -27,9 +27,9 @@
       },
       "tenantA-worker": {
         "container_name": "streamingestworker-tenantA",
-        "container_id": "3bd3a749376347a52645be17ff8d9fe687851cb898c7a4e2cd829deec6ca9805",
+        "container_id": "fcdf00cc61c0511fc8294a96a488f81ad29708d7f410df24a1b8fb0a0584fa8c",
         "status": "running",
-        "started_at": 1772314824,
+        "started_at": 1772318839,
         "kafka": "broker:29092",
         "cassandra": "cassandra"
       }

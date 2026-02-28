@@ -10,6 +10,8 @@ from pydantic import BaseModel
 
 APP_PORT = 8001
 
+MONITOR_URL = os.getenv("MONITOR_URL", "http://streamingestmonitor:8002")
+REPORT_WINDOW_SEC = os.getenv("REPORT_WINDOW_SEC", "10")
 STATE_PATH = os.getenv("STATE_PATH", "/app/state/workers.json")
 IMAGE_NAME = os.getenv("WORKER_IMAGE", "mysimbdp-platform:latest")
 KAFKA_BOOTSTRAP = os.getenv("KAFKA_BOOTSTRAP", "broker:9092")
@@ -126,6 +128,10 @@ def start_workers(tenant_id: str, req: StartReq):
             detach=True,
             network=network,
             restart_policy={"Name": "unless-stopped"},
+            environment={
+                "MONITOR_URL": MONITOR_URL,
+                "REPORT_WINDOW_SEC": REPORT_WINDOW_SEC,
+            },
         )
         status = "running"
         cid = c.id

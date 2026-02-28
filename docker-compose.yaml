@@ -39,6 +39,15 @@ services:
       - CASSANDRA_CLUSTER_NAME=mysimbdp
       - CASSANDRA_DC=datacenter1
       - CASSANDRA_RACK=rack1
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "cqlsh -e 'DESCRIBE KEYSPACES' localhost 2>/dev/null | grep -q system",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 20
     volumes:
       - cassandra_data:/var/lib/cassandra
 
@@ -64,6 +73,8 @@ services:
       # Manager uses these when launching workers
       KAFKA_BOOTSTRAP: "broker:29092"
       CASSANDRA_HOST: "cassandra"
+      MONITOR_URL: "http://streamingestmonitor:8002"
+      REPORT_WINDOW_SEC: "10"
       # It will auto-detect network name, but we also set a label
       MANAGER_NAME: "mysimbdp-streamingestmanager"
     ports:
@@ -74,7 +85,25 @@ services:
       # Persist manager state (so it remembers what it started)
       - ./state:/app/state
       - ./logs:/app/logs
-    command: ["python", "streamingestmanager.py"]
+    command:
+      ["python", "streamingestmanager.py"]
+
+      # Monitor API (receives reports + persists to Cassandra)
+  streamingestmonitor:
+    build:
+      context: .
+      dockerfile: Dockerfile.platform
+    image: mysimbdp-platform:latest
+    container_name: streamingestmonitor
+    depends_on:
+      cassandra:
+        condition: service_healthy
+    environment:
+      CASSANDRA_HOST: "cassandra"
+      MONITOR_PORT: "8002"
+    ports:
+      - "8002:8002"
+    command: ["python", "streamingestmonitor.py"]
 
 volumes:
   cassandra_data:

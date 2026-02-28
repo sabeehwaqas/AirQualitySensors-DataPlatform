@@ -3,6 +3,7 @@
 0. Install docker
 0. Run dokcer demon
 0. cd to the code folder
+0 install fastapi
 0. install pip install confluent-kafka cassandra-driver
 
 1. make them executed able:
@@ -54,6 +55,10 @@ RUN TERMIAL: chmod +x bootstrap.sh run_producers.sh teardown.sh
 5. to go into cassandra cqlsh to see data 
      RUN IN TERMINAL:docker exec -it cqlsh cqlsh cassandra 9042
 
+
+6.  to check the performacne report:
+    IN CQLSH : SELECT * FROM platform_logs.streaming_metrics WHERE tenant_id='tenantA' LIMIT 10;
+
 999. shutdown and delete kafka
     RUN TERMIAL: ./teardown.sh          # keeps volumes
         OR
@@ -62,3 +67,8 @@ RUN TERMIAL: chmod +x bootstrap.sh run_producers.sh teardown.sh
 
 
 
+for fresh docker image restart:
+docker compose down
+docker rmi mysimbdp-platform:latest
+docker compose build --no-cache
+docker compose up -d
