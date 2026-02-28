@@ -23,7 +23,7 @@ HEADERS = {
     "User-Agent": "airq-streaming-platform/0.1 (contact: sabeeh.waqas@aalto.fi)"
 }
 
-POLL_INTERVAL_SEC = 2               # how often we poll the API
+POLL_INTERVAL_SEC = 1               # how often we poll the API
 FETCH_TIMEOUT_SEC = 20              # HTTP timeout
 MAX_FETCH_ATTEMPTS = 5              # retries before giving up
 

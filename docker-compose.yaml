@@ -101,6 +101,9 @@ services:
     environment:
       CASSANDRA_HOST: "cassandra"
       MONITOR_PORT: "8002"
+      MANAGER_URL: "http://streamingestmanager:8001"
+      MAX_AVG_INGEST_MS: "50" #<------- CHANGE MAX_AVG_INGEST_MS to (e.g 0.1) see the alert api | Default : 50
+      MIN_RECORDS_PER_WINDOW: "1"
     ports:
       - "8002:8002"
     command: ["python", "streamingestmonitor.py"]

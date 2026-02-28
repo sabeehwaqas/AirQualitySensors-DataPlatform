@@ -27,11 +27,12 @@
       },
       "tenantA-worker": {
         "container_name": "streamingestworker-tenantA",
-        "container_id": "fcdf00cc61c0511fc8294a96a488f81ad29708d7f410df24a1b8fb0a0584fa8c",
+        "container_id": "74ad7a813433e6dfb794614a991e242477dae77c231a9d401a30d3c143731006",
         "status": "running",
-        "started_at": 1772318839,
+        "started_at": 1772321079,
         "kafka": "broker:29092",
-        "cassandra": "cassandra"
+        "cassandra": "cassandra",
+        "monitor_url": "http://streamingestmonitor:8002"
       }
     },
     "tenantB": {
@@ -45,12 +46,59 @@
       },
       "tenantB-worker": {
         "container_name": "streamingestworker-tenantB",
-        "container_id": "51bcf522a391132adbe4bf29dd5d365922426fbb6f91a3742ed7f75ac5eb1968",
+        "container_id": "4d62d9470a7dbb81a7c5f0b684114eb165a4e227f8874e2010df9c61aa0b0943",
         "status": "running",
-        "started_at": 1772314824,
+        "started_at": 1772321084,
         "kafka": "broker:29092",
-        "cassandra": "cassandra"
+        "cassandra": "cassandra",
+        "monitor_url": "http://streamingestmonitor:8002"
       }
     }
-  }
+  },
+  "alerts": [
+    {
+      "tenant_id": "tenantA",
+      "worker_id": "tenantA-streamingestworker",
+      "ts": "2026-02-28T23:24:50.459168+00:00",
+      "issue": "avg_ingest_ms_high",
+      "avg_ingest_ms": 3.2438278198242188,
+      "records": 5,
+      "window_sec": 10,
+      "threshold": 0.1,
+      "suggested_action": "restart"
+    },
+    {
+      "tenant_id": "tenantB",
+      "worker_id": "tenantB-streamingestworker",
+      "ts": "2026-02-28T23:24:55.605753+00:00",
+      "issue": "avg_ingest_ms_high",
+      "avg_ingest_ms": 3.664731979370117,
+      "records": 5,
+      "window_sec": 10,
+      "threshold": 0.1,
+      "suggested_action": "restart"
+    },
+    {
+      "tenant_id": "tenantA",
+      "worker_id": "tenantA-streamingestworker",
+      "ts": "2026-02-28T23:25:46.685869+00:00",
+      "issue": "avg_ingest_ms_high",
+      "avg_ingest_ms": 2.163436677720812,
+      "records": 18,
+      "window_sec": 10,
+      "threshold": 0.1,
+      "suggested_action": "restart"
+    },
+    {
+      "tenant_id": "tenantB",
+      "worker_id": "tenantB-streamingestworker",
+      "ts": "2026-02-28T23:25:51.621320+00:00",
+      "issue": "avg_ingest_ms_high",
+      "avg_ingest_ms": 2.5133536412165713,
+      "records": 13,
+      "window_sec": 10,
+      "threshold": 0.1,
+      "suggested_action": "restart"
+    }
+  ]
 }
