@@ -56,6 +56,7 @@
 4.Start TenantA worker and Start TenantB worker:
   RUN IN TERMINAL: 
   curl -X POST http://localhost:8001/tenants/tenantA/workers/start -H "Content-Type: application/json" -d '{}'
+  
   curl -X POST http://localhost:8001/tenants/tenantB/workers/start -H "Content-Type: application/json" -d '{}'
 
   4.1 List workers:
@@ -93,8 +94,7 @@
     RUN TERMIAL: 
         ./teardown.sh --volumes  # wipes Kafka data
 
-eq
-bb
+
 
 
 

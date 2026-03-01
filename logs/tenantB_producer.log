@@ -1,77 +1,323 @@
-%4|1772322960.086|GETPID|rdkafka#producer-1| [thrd:main]: Failed to acquire idempotence PID from broker localhost:9092/1: Broker: Coordinator load in progress: retrying
-%4|1772322960.593|GETPID|rdkafka#producer-1| [thrd:main]: Failed to acquire idempotence PID from broker localhost:9092/1: Broker: Coordinator load in progress: retrying
 /Users/muhammadsabeehwaqas/Documents/AirQualitySensors-DataPlatform/tenantB_producer.py:103: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
   "ingest_ts_utc": datetime.utcnow().isoformat(timespec="seconds") + "Z",
 ==> TenantB producer started. Kafka=localhost:9092, topic=tenantB.bronze.raw
 Press Ctrl+C to stop.
 
-TenantB -> topic=tenantB.bronze.raw key=90462 ts=2026-02-28 23:53:03 location_id=90462 sensor_id=97614
-❌ Delivery failed: KafkaError{code=INVALID_PRODUCER_EPOCH,val=47,str="Broker: Producer attempted an operation with an old epoch"}
-TenantB -> topic=tenantB.bronze.raw key=88542 ts=2026-02-28 23:54:16 location_id=88542 sensor_id=95688
-❌ Delivery failed: KafkaError{code=INVALID_PRODUCER_EPOCH,val=47,str="Broker: Producer attempted an operation with an old epoch"}
-TenantB -> topic=tenantB.bronze.raw key=74071 ts=2026-02-28 23:54:09 location_id=74071 sensor_id=83450
-❌ Delivery failed: KafkaError{code=INVALID_PRODUCER_EPOCH,val=47,str="Broker: Producer attempted an operation with an old epoch"}
-TenantB -> topic=tenantB.bronze.raw key=38655 ts=2026-02-28 23:53:25 location_id=38655 sensor_id=52774
-TenantB -> topic=tenantB.bronze.raw key=91327 ts=2026-02-28 23:54:29 location_id=91327 sensor_id=98280
-❌ Delivery failed: KafkaError{code=INVALID_PRODUCER_EPOCH,val=47,str="Broker: Producer attempted an operation with an old epoch"}
-TenantB -> topic=tenantB.bronze.raw key=64055 ts=2026-02-28 23:54:10 location_id=64055 sensor_id=75475
-❌ Delivery failed: KafkaError{code=INVALID_PRODUCER_EPOCH,val=47,str="Broker: Producer attempted an operation with an old epoch"}
-TenantB -> topic=tenantB.bronze.raw key=10380 ts=2026-02-28 23:55:14 location_id=10380 sensor_id=20442
-TenantB -> topic=tenantB.bronze.raw key=16786 ts=2026-02-28 23:52:52 location_id=16786 sensor_id=29917
-❌ Delivery failed: KafkaError{code=INVALID_PRODUCER_EPOCH,val=47,str="Broker: Producer attempted an operation with an old epoch"}
-TenantB -> topic=tenantB.bronze.raw key=11311 ts=2026-02-28 23:54:23 location_id=11311 sensor_id=22284
-❌ Delivery failed: KafkaError{code=INVALID_PRODUCER_EPOCH,val=47,str="Broker: Producer attempted an operation with an old epoch"}
-TenantB -> topic=tenantB.bronze.raw key=86293 ts=2026-02-28 23:53:41 location_id=86293 sensor_id=93813
-❌ Delivery failed: KafkaError{code=INVALID_PRODUCER_EPOCH,val=47,str="Broker: Producer attempted an operation with an old epoch"}
-TenantB -> topic=tenantB.bronze.raw key=15317 ts=2026-02-28 23:54:12 location_id=15317 sensor_id=27983
-❌ Delivery failed: KafkaError{code=INVALID_PRODUCER_EPOCH,val=47,str="Broker: Producer attempted an operation with an old epoch"}
-TenantB -> topic=tenantB.bronze.raw key=19049 ts=2026-02-28 23:55:40 location_id=19049 sensor_id=32639
-❌ Delivery failed: KafkaError{code=INVALID_PRODUCER_EPOCH,val=47,str="Broker: Producer attempted an operation with an old epoch"}
-TenantB -> topic=tenantB.bronze.raw key=4744 ts=2026-02-28 23:55:06 location_id=4744 sensor_id=9410
-❌ Delivery failed: KafkaError{code=INVALID_PRODUCER_EPOCH,val=47,str="Broker: Producer attempted an operation with an old epoch"}
-TenantB -> topic=tenantB.bronze.raw key=91217 ts=2026-02-28 23:55:43 location_id=91217 sensor_id=69056
-❌ Delivery failed: KafkaError{code=INVALID_PRODUCER_EPOCH,val=47,str="Broker: Producer attempted an operation with an old epoch"}
-TenantB -> topic=tenantB.bronze.raw key=34180 ts=2026-02-28 23:53:48 location_id=34180 sensor_id=48379
-❌ Delivery failed: KafkaError{code=INVALID_PRODUCER_EPOCH,val=47,str="Broker: Producer attempted an operation with an old epoch"}
-TenantB -> topic=tenantB.bronze.raw key=59483 ts=2026-02-28 23:56:06 location_id=59483 sensor_id=71635
-❌ Delivery failed: KafkaError{code=INVALID_PRODUCER_EPOCH,val=47,str="Broker: Producer attempted an operation with an old epoch"}
-TenantB -> topic=tenantB.bronze.raw key=57554 ts=2026-02-28 23:55:12 location_id=57554 sensor_id=70183
-❌ Delivery failed: KafkaError{code=INVALID_PRODUCER_EPOCH,val=47,str="Broker: Producer attempted an operation with an old epoch"}
-TenantB -> topic=tenantB.bronze.raw key=10233 ts=2026-02-28 23:55:56 location_id=10233 sensor_id=20144
-❌ Delivery failed: KafkaError{code=INVALID_PRODUCER_EPOCH,val=47,str="Broker: Producer attempted an operation with an old epoch"}
-TenantB -> topic=tenantB.bronze.raw key=90768 ts=2026-02-28 23:55:28 location_id=90768 sensor_id=97854
-❌ Delivery failed: KafkaError{code=INVALID_PRODUCER_EPOCH,val=47,str="Broker: Producer attempted an operation with an old epoch"}
-TenantB -> topic=tenantB.bronze.raw key=37579 ts=2026-02-28 23:53:47 location_id=37579 sensor_id=39750
-❌ Delivery failed: KafkaError{code=INVALID_PRODUCER_EPOCH,val=47,str="Broker: Producer attempted an operation with an old epoch"}
-TenantB -> topic=tenantB.bronze.raw key=18084 ts=2026-02-28 23:55:04 location_id=18084 sensor_id=31455
-❌ Delivery failed: KafkaError{code=INVALID_PRODUCER_EPOCH,val=47,str="Broker: Producer attempted an operation with an old epoch"}
-TenantB -> topic=tenantB.bronze.raw key=9752 ts=2026-02-28 23:52:22 location_id=9752 sensor_id=19236
-❌ Delivery failed: KafkaError{code=INVALID_PRODUCER_EPOCH,val=47,str="Broker: Producer attempted an operation with an old epoch"}
-TenantB -> topic=tenantB.bronze.raw key=54486 ts=2026-02-28 23:56:00 location_id=54486 sensor_id=67697
-❌ Delivery failed: KafkaError{code=INVALID_PRODUCER_EPOCH,val=47,str="Broker: Producer attempted an operation with an old epoch"}
-TenantB -> topic=tenantB.bronze.raw key=16846 ts=2026-02-28 23:55:33 location_id=16846 sensor_id=30002
-❌ Delivery failed: KafkaError{code=INVALID_PRODUCER_EPOCH,val=47,str="Broker: Producer attempted an operation with an old epoch"}
-TenantB -> topic=tenantB.bronze.raw key=8365 ts=2026-02-28 23:55:37 location_id=8365 sensor_id=16505
-❌ Delivery failed: KafkaError{code=INVALID_PRODUCER_EPOCH,val=47,str="Broker: Producer attempted an operation with an old epoch"}
-TenantB -> topic=tenantB.bronze.raw key=7282 ts=2026-02-28 23:54:27 location_id=7282 sensor_id=14394
-❌ Delivery failed: KafkaError{code=INVALID_PRODUCER_EPOCH,val=47,str="Broker: Producer attempted an operation with an old epoch"}
-TenantB -> topic=tenantB.bronze.raw key=78028 ts=2026-02-28 23:55:30 location_id=78028 sensor_id=87186
-❌ Delivery failed: KafkaError{code=INVALID_PRODUCER_EPOCH,val=47,str="Broker: Producer attempted an operation with an old epoch"}
-TenantB -> topic=tenantB.bronze.raw key=39663 ts=2026-02-28 23:56:58 location_id=39663 sensor_id=52291
-❌ Delivery failed: KafkaError{code=INVALID_PRODUCER_EPOCH,val=47,str="Broker: Producer attempted an operation with an old epoch"}
-TenantB -> topic=tenantB.bronze.raw key=8482 ts=2026-02-28 23:56:20 location_id=8482 sensor_id=16727
-❌ Delivery failed: KafkaError{code=INVALID_PRODUCER_EPOCH,val=47,str="Broker: Producer attempted an operation with an old epoch"}
-TenantB -> topic=tenantB.bronze.raw key=77761 ts=2026-02-28 23:57:10 location_id=77761 sensor_id=86920
-❌ Delivery failed: KafkaError{code=INVALID_PRODUCER_EPOCH,val=47,str="Broker: Producer attempted an operation with an old epoch"}
-TenantB -> topic=tenantB.bronze.raw key=8594 ts=2026-02-28 23:56:03 location_id=8594 sensor_id=16955
-❌ Delivery failed: KafkaError{code=INVALID_PRODUCER_EPOCH,val=47,str="Broker: Producer attempted an operation with an old epoch"}
-TenantB -> topic=tenantB.bronze.raw key=8192 ts=2026-02-28 23:56:48 location_id=8192 sensor_id=16171
-❌ Delivery failed: KafkaError{code=INVALID_PRODUCER_EPOCH,val=47,str="Broker: Producer attempted an operation with an old epoch"}
-TenantB -> topic=tenantB.bronze.raw key=76049 ts=2026-02-28 23:56:56 location_id=76049 sensor_id=85622
-❌ Delivery failed: KafkaError{code=INVALID_PRODUCER_EPOCH,val=47,str="Broker: Producer attempted an operation with an old epoch"}
-TenantB -> topic=tenantB.bronze.raw key=38546 ts=2026-02-28 23:56:08 location_id=38546 sensor_id=3487
-❌ Delivery failed: KafkaError{code=INVALID_PRODUCER_EPOCH,val=47,str="Broker: Producer attempted an operation with an old epoch"}
-TenantB -> topic=tenantB.bronze.raw key=23334 ts=2026-02-28 23:56:45 location_id=23334 sensor_id=37477
-❌ Delivery failed: KafkaError{code=INVALID_PRODUCER_EPOCH,val=47,str="Broker: Producer attempted an operation with an old epoch"}
-TenantB -> topic=tenantB.bronze.raw key=9873 ts=2026-02-28 23:54:25 location_id=9873 sensor_id=17261
-❌ Delivery failed: KafkaError{code=INVALID_PRODUCER_EPOCH,val=47,str="Broker: Producer attempted an operation with an old epoch"}
+TenantB -> topic=tenantB.bronze.raw key=17371 ts=2026-03-01 01:29:00 location_id=17371 sensor_id=30605
+TenantB -> topic=tenantB.bronze.raw key=12094 ts=2026-03-01 01:28:57 location_id=12094 sensor_id=23826
+TenantB -> topic=tenantB.bronze.raw key=68324 ts=2026-03-01 01:28:10 location_id=68324 sensor_id=19546
+TenantB -> topic=tenantB.bronze.raw key=74217 ts=2026-03-01 01:28:40 location_id=74217 sensor_id=84121
+TenantB -> topic=tenantB.bronze.raw key=71613 ts=2026-03-01 01:28:31 location_id=71613 sensor_id=82043
+TenantB -> topic=tenantB.bronze.raw key=90650 ts=2026-03-01 01:26:37 location_id=90650 sensor_id=97739
+TenantB -> topic=tenantB.bronze.raw key=85467 ts=2026-03-01 01:29:39 location_id=85467 sensor_id=93159
+TenantB -> topic=tenantB.bronze.raw key=38826 ts=2026-03-01 01:28:41 location_id=38826 sensor_id=52526
+TenantB -> topic=tenantB.bronze.raw key=50280 ts=2026-03-01 01:29:22 location_id=50280 sensor_id=64035
+TenantB -> topic=tenantB.bronze.raw key=84829 ts=2026-03-01 01:28:06 location_id=84829 sensor_id=92672
+TenantB -> topic=tenantB.bronze.raw key=87130 ts=2026-03-01 01:28:59 location_id=87130 sensor_id=94870
+TenantB -> topic=tenantB.bronze.raw key=90028 ts=2026-03-01 01:28:31 location_id=90028 sensor_id=95180
+TenantB -> topic=tenantB.bronze.raw key=84950 ts=2026-03-01 01:28:16 location_id=84950 sensor_id=49532
+TenantB -> topic=tenantB.bronze.raw key=84736 ts=2026-03-01 01:28:17 location_id=84736 sensor_id=92573
+TenantB -> topic=tenantB.bronze.raw key=11882 ts=2026-03-01 01:28:25 location_id=11882 sensor_id=23418
+TenantB -> topic=tenantB.bronze.raw key=40978 ts=2026-03-01 01:29:24 location_id=40978 sensor_id=55083
+TenantB -> topic=tenantB.bronze.raw key=14720 ts=2026-03-01 01:28:58 location_id=14720 sensor_id=27207
+TenantB -> topic=tenantB.bronze.raw key=25606 ts=2026-03-01 01:28:01 location_id=25606 sensor_id=8281
+TenantB -> topic=tenantB.bronze.raw key=10517 ts=2026-03-01 01:29:57 location_id=10517 sensor_id=20712
+TenantB -> topic=tenantB.bronze.raw key=10194 ts=2026-03-01 01:29:09 location_id=10194 sensor_id=20068
+TenantB -> topic=tenantB.bronze.raw key=16050 ts=2026-03-01 01:27:57 location_id=16050 sensor_id=28944
+TenantB -> topic=tenantB.bronze.raw key=64906 ts=2026-03-01 01:29:51 location_id=64906 sensor_id=76156
+TenantB -> topic=tenantB.bronze.raw key=38082 ts=2026-03-01 01:29:26 location_id=38082 sensor_id=52084
+TenantB -> topic=tenantB.bronze.raw key=48703 ts=2026-03-01 01:29:54 location_id=48703 sensor_id=62631
+TenantB -> topic=tenantB.bronze.raw key=84646 ts=2026-03-01 01:29:16 location_id=84646 sensor_id=92494
+TenantB -> topic=tenantB.bronze.raw key=86396 ts=2026-03-01 01:29:41 location_id=86396 sensor_id=93911
+TenantB -> topic=tenantB.bronze.raw key=82762 ts=2026-03-01 01:28:14 location_id=82762 sensor_id=90707
+TenantB -> topic=tenantB.bronze.raw key=91439 ts=2026-03-01 01:29:35 location_id=91439 sensor_id=98354
+TenantB -> topic=tenantB.bronze.raw key=37710 ts=2026-03-01 01:29:23 location_id=37710 sensor_id=51633
+TenantB -> topic=tenantB.bronze.raw key=47863 ts=2026-03-01 01:29:16 location_id=47863 sensor_id=61906
+TenantB -> topic=tenantB.bronze.raw key=30155 ts=2026-03-01 01:28:04 location_id=30155 sensor_id=44452
+TenantB -> topic=tenantB.bronze.raw key=52653 ts=2026-03-01 01:30:15 location_id=52653 sensor_id=65871
+⚠️ Fetch failed (attempt 1/5). Retrying in 2s... (('Received response with content-encoding: gzip, but failed to decode it.', error('Error -3 while decompressing data: incorrect data check')))
+TenantB -> topic=tenantB.bronze.raw key=41300 ts=2026-03-01 01:30:00 location_id=41300 sensor_id=53012
+TenantB -> topic=tenantB.bronze.raw key=45510 ts=2026-03-01 01:30:37 location_id=45510 sensor_id=27906
+TenantB -> topic=tenantB.bronze.raw key=26504 ts=2026-03-01 01:29:43 location_id=26504 sensor_id=39619
+TenantB -> topic=tenantB.bronze.raw key=74869 ts=2026-03-01 01:30:41 location_id=74869 sensor_id=84638
+TenantB -> topic=tenantB.bronze.raw key=59403 ts=2026-03-01 01:30:58 location_id=59403 sensor_id=71567
+TenantB -> topic=tenantB.bronze.raw key=37111 ts=2026-03-01 01:30:39 location_id=37111 sensor_id=51064
+TenantB -> topic=tenantB.bronze.raw key=45276 ts=2026-03-01 01:31:15 location_id=45276 sensor_id=59466
+TenantB -> topic=tenantB.bronze.raw key=87000 ts=2026-03-01 01:30:14 location_id=87000 sensor_id=94705
+TenantB -> topic=tenantB.bronze.raw key=63119 ts=2026-03-01 01:30:59 location_id=63119 sensor_id=74613
+TenantB -> topic=tenantB.bronze.raw key=7268 ts=2026-03-01 01:30:29 location_id=7268 sensor_id=14370
+TenantB -> topic=tenantB.bronze.raw key=82376 ts=2026-03-01 01:31:01 location_id=82376 sensor_id=62408
+TenantB -> topic=tenantB.bronze.raw key=73140 ts=2026-03-01 01:30:28 location_id=73140 sensor_id=83246
+TenantB -> topic=tenantB.bronze.raw key=32190 ts=2026-03-01 01:30:38 location_id=32190 sensor_id=32147
+TenantB -> topic=tenantB.bronze.raw key=88297 ts=2026-03-01 01:30:03 location_id=88297 sensor_id=95035
+TenantB -> topic=tenantB.bronze.raw key=10216 ts=2026-03-01 01:30:56 location_id=10216 sensor_id=20110
+TenantB -> topic=tenantB.bronze.raw key=41425 ts=2026-03-01 01:30:39 location_id=41425 sensor_id=47221
+TenantB -> topic=tenantB.bronze.raw key=81293 ts=2026-03-01 01:30:50 location_id=81293 sensor_id=89544
+TenantB -> topic=tenantB.bronze.raw key=78795 ts=2026-03-01 01:31:05 location_id=78795 sensor_id=87647
+TenantB -> topic=tenantB.bronze.raw key=18973 ts=2026-03-01 01:29:08 location_id=18973 sensor_id=32534
+TenantB -> topic=tenantB.bronze.raw key=43748 ts=2026-03-01 01:28:13 location_id=43748 sensor_id=57940
+TenantB -> topic=tenantB.bronze.raw key=65944 ts=2026-03-01 01:30:15 location_id=65944 sensor_id=77009
+TenantB -> topic=tenantB.bronze.raw key=33575 ts=2026-03-01 01:30:46 location_id=33575 sensor_id=47810
+TenantB -> topic=tenantB.bronze.raw key=35916 ts=2026-03-01 01:29:58 location_id=35916 sensor_id=50034
+TenantB -> topic=tenantB.bronze.raw key=25875 ts=2026-03-01 01:29:58 location_id=25875 sensor_id=40155
+TenantB -> topic=tenantB.bronze.raw key=67152 ts=2026-03-01 01:31:01 location_id=67152 sensor_id=77955
+TenantB -> topic=tenantB.bronze.raw key=9221 ts=2026-03-01 01:30:15 location_id=9221 sensor_id=3968
+TenantB -> topic=tenantB.bronze.raw key=18929 ts=2026-03-01 01:28:58 location_id=18929 sensor_id=32476
+TenantB -> topic=tenantB.bronze.raw key=4028 ts=2026-03-01 01:30:47 location_id=4028 sensor_id=7965
+TenantB -> topic=tenantB.bronze.raw key=15126 ts=2026-03-01 01:29:36 location_id=15126 sensor_id=27729
+TenantB -> topic=tenantB.bronze.raw key=45515 ts=2026-03-01 01:30:25 location_id=45515 sensor_id=59657
+TenantB -> topic=tenantB.bronze.raw key=28839 ts=2026-03-01 01:26:33 location_id=28839 sensor_id=43226
+TenantB -> topic=tenantB.bronze.raw key=17057 ts=2026-03-01 01:29:31 location_id=17057 sensor_id=29931
+TenantB -> topic=tenantB.bronze.raw key=82390 ts=2026-03-01 01:30:45 location_id=82390 sensor_id=90423
+TenantB -> topic=tenantB.bronze.raw key=64700 ts=2026-03-01 01:29:49 location_id=64700 sensor_id=76009
+TenantB -> topic=tenantB.bronze.raw key=87002 ts=2026-03-01 01:29:38 location_id=87002 sensor_id=92972
+TenantB -> topic=tenantB.bronze.raw key=5574 ts=2026-03-01 01:30:45 location_id=5574 sensor_id=11042
+TenantB -> topic=tenantB.bronze.raw key=65647 ts=2026-03-01 01:32:05 location_id=65647 sensor_id=76716
+TenantB -> topic=tenantB.bronze.raw key=35501 ts=2026-03-01 01:31:47 location_id=35501 sensor_id=38989
+TenantB -> topic=tenantB.bronze.raw key=76522 ts=2026-03-01 01:31:11 location_id=76522 sensor_id=85956
+TenantB -> topic=tenantB.bronze.raw key=89323 ts=2026-03-01 01:31:23 location_id=89323 sensor_id=96758
+TenantB -> topic=tenantB.bronze.raw key=85007 ts=2026-03-01 01:30:40 location_id=85007 sensor_id=92600
+TenantB -> topic=tenantB.bronze.raw key=15183 ts=2026-03-01 01:30:51 location_id=15183 sensor_id=27804
+TenantB -> topic=tenantB.bronze.raw key=76968 ts=2026-03-01 01:31:40 location_id=76968 sensor_id=86310
+TenantB -> topic=tenantB.bronze.raw key=13975 ts=2026-03-01 01:30:43 location_id=13975 sensor_id=26243
+TenantB -> topic=tenantB.bronze.raw key=78679 ts=2026-03-01 01:30:28 location_id=78679 sensor_id=87571
+TenantB -> topic=tenantB.bronze.raw key=64039 ts=2026-03-01 01:30:13 location_id=64039 sensor_id=75459
+TenantB -> topic=tenantB.bronze.raw key=2651 ts=2026-03-01 01:31:37 location_id=2651 sensor_id=5257
+TenantB -> topic=tenantB.bronze.raw key=8567 ts=2026-03-01 01:30:46 location_id=8567 sensor_id=16900
+TenantB -> topic=tenantB.bronze.raw key=11614 ts=2026-03-01 01:31:30 location_id=11614 sensor_id=22894
+TenantB -> topic=tenantB.bronze.raw key=26708 ts=2026-03-01 01:31:01 location_id=26708 sensor_id=40981
+TenantB -> topic=tenantB.bronze.raw key=16153 ts=2026-03-01 01:30:37 location_id=16153 sensor_id=28444
+TenantB -> topic=tenantB.bronze.raw key=85465 ts=2026-03-01 01:31:31 location_id=85465 sensor_id=93155
+TenantB -> topic=tenantB.bronze.raw key=17913 ts=2026-03-01 01:30:07 location_id=17913 sensor_id=31281
+TenantB -> topic=tenantB.bronze.raw key=64873 ts=2026-03-01 01:29:50 location_id=64873 sensor_id=76127
+TenantB -> topic=tenantB.bronze.raw key=40029 ts=2026-03-01 01:29:48 location_id=40029 sensor_id=54122
+TenantB -> topic=tenantB.bronze.raw key=39569 ts=2026-03-01 01:30:19 location_id=39569 sensor_id=53246
+TenantB -> topic=tenantB.bronze.raw key=516 ts=2026-03-01 01:27:39 location_id=516 sensor_id=1055
+TenantB -> topic=tenantB.bronze.raw key=9944 ts=2026-03-01 01:29:46 location_id=9944 sensor_id=19594
+TenantB -> topic=tenantB.bronze.raw key=730 ts=2026-03-01 01:31:51 location_id=730 sensor_id=1475
+TenantB -> topic=tenantB.bronze.raw key=18083 ts=2026-03-01 01:31:37 location_id=18083 sensor_id=26484
+TenantB -> topic=tenantB.bronze.raw key=76725 ts=2026-03-01 01:30:35 location_id=76725 sensor_id=86101
+TenantB -> topic=tenantB.bronze.raw key=82923 ts=2026-03-01 01:30:44 location_id=82923 sensor_id=90807
+TenantB -> topic=tenantB.bronze.raw key=26605 ts=2026-03-01 01:30:42 location_id=26605 sensor_id=40887
+TenantB -> topic=tenantB.bronze.raw key=17348 ts=2026-03-01 01:31:38 location_id=17348 sensor_id=30572
+TenantB -> topic=tenantB.bronze.raw key=46103 ts=2026-03-01 01:32:52 location_id=46103 sensor_id=60241
+TenantB -> topic=tenantB.bronze.raw key=90216 ts=2026-03-01 01:32:51 location_id=90216 sensor_id=97436
+TenantB -> topic=tenantB.bronze.raw key=14273 ts=2026-03-01 01:30:37 location_id=14273 sensor_id=26647
+TenantB -> topic=tenantB.bronze.raw key=10576 ts=2026-03-01 01:31:47 location_id=10576 sensor_id=20830
+TenantB -> topic=tenantB.bronze.raw key=81508 ts=2026-03-01 01:31:59 location_id=81508 sensor_id=89852
+TenantB -> topic=tenantB.bronze.raw key=37702 ts=2026-03-01 01:32:48 location_id=37702 sensor_id=51623
+TenantB -> topic=tenantB.bronze.raw key=29479 ts=2026-03-01 01:32:59 location_id=29479 sensor_id=31773
+TenantB -> topic=tenantB.bronze.raw key=48456 ts=2026-03-01 01:33:14 location_id=48456 sensor_id=62417
+TenantB -> topic=tenantB.bronze.raw key=25085 ts=2026-03-01 01:31:45 location_id=25085 sensor_id=39360
+TenantB -> topic=tenantB.bronze.raw key=35840 ts=2026-03-01 01:30:37 location_id=35840 sensor_id=49949
+TenantB -> topic=tenantB.bronze.raw key=81394 ts=2026-03-01 01:31:44 location_id=81394 sensor_id=83702
+TenantB -> topic=tenantB.bronze.raw key=50274 ts=2026-03-01 01:31:08 location_id=50274 sensor_id=63016
+TenantB -> topic=tenantB.bronze.raw key=22335 ts=2026-03-01 01:28:38 location_id=22335 sensor_id=36304
+TenantB -> topic=tenantB.bronze.raw key=83762 ts=2026-03-01 01:32:44 location_id=83762 sensor_id=91334
+TenantB -> topic=tenantB.bronze.raw key=4500 ts=2026-03-01 01:33:13 location_id=4500 sensor_id=8929
+TenantB -> topic=tenantB.bronze.raw key=28318 ts=2026-03-01 01:30:57 location_id=28318 sensor_id=40616
+TenantB -> topic=tenantB.bronze.raw key=82039 ts=2026-03-01 01:33:15 location_id=82039 sensor_id=90214
+TenantB -> topic=tenantB.bronze.raw key=3503 ts=2026-03-01 01:31:24 location_id=3503 sensor_id=6926
+TenantB -> topic=tenantB.bronze.raw key=16578 ts=2026-03-01 01:32:49 location_id=16578 sensor_id=29663
+TenantB -> topic=tenantB.bronze.raw key=16122 ts=2026-03-01 01:32:06 location_id=16122 sensor_id=29030
+TenantB -> topic=tenantB.bronze.raw key=36893 ts=2026-03-01 01:30:41 location_id=36893 sensor_id=49820
+TenantB -> topic=tenantB.bronze.raw key=8322 ts=2026-03-01 01:33:00 location_id=8322 sensor_id=16426
+TenantB -> topic=tenantB.bronze.raw key=82098 ts=2026-03-01 01:33:04 location_id=82098 sensor_id=90271
+TenantB -> topic=tenantB.bronze.raw key=28640 ts=2026-03-01 01:31:05 location_id=28640 sensor_id=43016
+TenantB -> topic=tenantB.bronze.raw key=63818 ts=2026-03-01 01:33:10 location_id=63818 sensor_id=72123
+TenantB -> topic=tenantB.bronze.raw key=11882 ts=2026-03-01 01:30:55 location_id=11882 sensor_id=23418
+TenantB -> topic=tenantB.bronze.raw key=57493 ts=2026-03-01 01:31:56 location_id=57493 sensor_id=70131
+TenantB -> topic=tenantB.bronze.raw key=24016 ts=2026-03-01 01:31:26 location_id=24016 sensor_id=38209
+TenantB -> topic=tenantB.bronze.raw key=4647 ts=2026-03-01 01:31:11 location_id=4647 sensor_id=9225
+TenantB -> topic=tenantB.bronze.raw key=68523 ts=2026-03-01 01:33:01 location_id=68523 sensor_id=79117
+TenantB -> topic=tenantB.bronze.raw key=64891 ts=2026-03-01 01:31:48 location_id=64891 sensor_id=76141
+TenantB -> topic=tenantB.bronze.raw key=33733 ts=2026-03-01 01:31:08 location_id=33733 sensor_id=47966
+TenantB -> topic=tenantB.bronze.raw key=24132 ts=2026-03-01 01:32:03 location_id=24132 sensor_id=38335
+TenantB -> topic=tenantB.bronze.raw key=90902 ts=2026-03-01 01:33:12 location_id=90902 sensor_id=97960
+TenantB -> topic=tenantB.bronze.raw key=90125 ts=2026-03-01 01:31:35 location_id=90125 sensor_id=97348
+TenantB -> topic=tenantB.bronze.raw key=20256 ts=2026-03-01 01:33:07 location_id=20256 sensor_id=33975
+TenantB -> topic=tenantB.bronze.raw key=70550 ts=2026-03-01 01:32:50 location_id=70550 sensor_id=81052
+TenantB -> topic=tenantB.bronze.raw key=68337 ts=2026-03-01 01:33:58 location_id=68337 sensor_id=75321
+TenantB -> topic=tenantB.bronze.raw key=72315 ts=2026-03-01 01:34:14 location_id=72315 sensor_id=65079
+TenantB -> topic=tenantB.bronze.raw key=81542 ts=2026-03-01 01:32:50 location_id=81542 sensor_id=89889
+TenantB -> topic=tenantB.bronze.raw key=24751 ts=2026-03-01 01:31:49 location_id=24751 sensor_id=38970
+TenantB -> topic=tenantB.bronze.raw key=46693 ts=2026-03-01 01:32:58 location_id=46693 sensor_id=60858
+TenantB -> topic=tenantB.bronze.raw key=84252 ts=2026-03-01 01:33:06 location_id=84252 sensor_id=91839
+TenantB -> topic=tenantB.bronze.raw key=48553 ts=2026-03-01 01:30:12 location_id=48553 sensor_id=60852
+TenantB -> topic=tenantB.bronze.raw key=11231 ts=2026-03-01 01:32:24 location_id=11231 sensor_id=22130
+TenantB -> topic=tenantB.bronze.raw key=71063 ts=2026-03-01 01:30:12 location_id=71063 sensor_id=78480
+TenantB -> topic=tenantB.bronze.raw key=11544 ts=2026-03-01 01:34:09 location_id=11544 sensor_id=22755
+TenantB -> topic=tenantB.bronze.raw key=50068 ts=2026-03-01 01:32:48 location_id=50068 sensor_id=63789
+TenantB -> topic=tenantB.bronze.raw key=73767 ts=2026-03-01 01:34:03 location_id=73767 sensor_id=83524
+TenantB -> topic=tenantB.bronze.raw key=88518 ts=2026-03-01 01:32:43 location_id=88518 sensor_id=96214
+TenantB -> topic=tenantB.bronze.raw key=54482 ts=2026-03-01 01:33:36 location_id=54482 sensor_id=67693
+TenantB -> topic=tenantB.bronze.raw key=5961 ts=2026-03-01 01:33:02 location_id=5961 sensor_id=11808
+TenantB -> topic=tenantB.bronze.raw key=39196 ts=2026-03-01 01:34:14 location_id=39196 sensor_id=53308
+TenantB -> topic=tenantB.bronze.raw key=26327 ts=2026-03-01 01:33:08 location_id=26327 sensor_id=39680
+TenantB -> topic=tenantB.bronze.raw key=85202 ts=2026-03-01 01:32:25 location_id=85202 sensor_id=92947
+TenantB -> topic=tenantB.bronze.raw key=81669 ts=2026-03-01 01:33:20 location_id=81669 sensor_id=89981
+TenantB -> topic=tenantB.bronze.raw key=77548 ts=2026-03-01 01:34:11 location_id=77548 sensor_id=13203
+TenantB -> topic=tenantB.bronze.raw key=2057 ts=2026-03-01 01:33:10 location_id=2057 sensor_id=4084
+TenantB -> topic=tenantB.bronze.raw key=83414 ts=2026-03-01 01:33:43 location_id=83414 sensor_id=91076
+TenantB -> topic=tenantB.bronze.raw key=49929 ts=2026-03-01 01:34:01 location_id=49929 sensor_id=63786
+TenantB -> topic=tenantB.bronze.raw key=40724 ts=2026-03-01 01:33:13 location_id=40724 sensor_id=54823
+TenantB -> topic=tenantB.bronze.raw key=8072 ts=2026-03-01 01:32:46 location_id=8072 sensor_id=15947
+TenantB -> topic=tenantB.bronze.raw key=3622 ts=2026-03-01 01:32:06 location_id=3622 sensor_id=7160
+TenantB -> topic=tenantB.bronze.raw key=21558 ts=2026-03-01 01:33:20 location_id=21558 sensor_id=35438
+TenantB -> topic=tenantB.bronze.raw key=56050 ts=2026-03-01 01:32:09 location_id=56050 sensor_id=64853
+TenantB -> topic=tenantB.bronze.raw key=68886 ts=2026-03-01 01:32:15 location_id=68886 sensor_id=79434
+TenantB -> topic=tenantB.bronze.raw key=64777 ts=2026-03-01 01:34:13 location_id=64777 sensor_id=76075
+TenantB -> topic=tenantB.bronze.raw key=49573 ts=2026-03-01 01:32:14 location_id=49573 sensor_id=63445
+TenantB -> topic=tenantB.bronze.raw key=10114 ts=2026-03-01 01:34:59 location_id=10114 sensor_id=19903
+TenantB -> topic=tenantB.bronze.raw key=59855 ts=2026-03-01 01:34:23 location_id=59855 sensor_id=71981
+TenantB -> topic=tenantB.bronze.raw key=24897 ts=2026-03-01 01:34:02 location_id=24897 sensor_id=23682
+TenantB -> topic=tenantB.bronze.raw key=16741 ts=2026-03-01 01:34:49 location_id=16741 sensor_id=29864
+TenantB -> topic=tenantB.bronze.raw key=2397 ts=2026-03-01 01:33:13 location_id=2397 sensor_id=4766
+TenantB -> topic=tenantB.bronze.raw key=64212 ts=2026-03-01 01:33:22 location_id=64212 sensor_id=38847
+TenantB -> topic=tenantB.bronze.raw key=38760 ts=2026-03-01 01:34:39 location_id=38760 sensor_id=52897
+TenantB -> topic=tenantB.bronze.raw key=32779 ts=2026-03-01 01:34:55 location_id=32779 sensor_id=47022
+TenantB -> topic=tenantB.bronze.raw key=56300 ts=2026-03-01 01:33:38 location_id=56300 sensor_id=65200
+TenantB -> topic=tenantB.bronze.raw key=6460 ts=2026-03-01 01:34:22 location_id=6460 sensor_id=12792
+TenantB -> topic=tenantB.bronze.raw key=67393 ts=2026-03-01 01:33:09 location_id=67393 sensor_id=78142
+TenantB -> topic=tenantB.bronze.raw key=87553 ts=2026-03-01 01:34:56 location_id=87553 sensor_id=95379
+TenantB -> topic=tenantB.bronze.raw key=44859 ts=2026-03-01 01:32:25 location_id=44859 sensor_id=59072
+TenantB -> topic=tenantB.bronze.raw key=71895 ts=2026-03-01 01:34:24 location_id=71895 sensor_id=76397
+TenantB -> topic=tenantB.bronze.raw key=80044 ts=2026-03-01 01:33:13 location_id=80044 sensor_id=45707
+TenantB -> topic=tenantB.bronze.raw key=904 ts=2026-03-01 01:33:57 location_id=904 sensor_id=1812
+TenantB -> topic=tenantB.bronze.raw key=84949 ts=2026-03-01 01:33:13 location_id=84949 sensor_id=92765
+TenantB -> topic=tenantB.bronze.raw key=861 ts=2026-03-01 01:33:27 location_id=861 sensor_id=41703
+TenantB -> topic=tenantB.bronze.raw key=71051 ts=2026-03-01 01:34:47 location_id=71051 sensor_id=80673
+TenantB -> topic=tenantB.bronze.raw key=75612 ts=2026-03-01 01:35:00 location_id=75612 sensor_id=85222
+TenantB -> topic=tenantB.bronze.raw key=90562 ts=2026-03-01 01:34:48 location_id=90562 sensor_id=97667
+TenantB -> topic=tenantB.bronze.raw key=12316 ts=2026-03-01 01:33:53 location_id=12316 sensor_id=24157
+TenantB -> topic=tenantB.bronze.raw key=8368 ts=2026-03-01 01:33:58 location_id=8368 sensor_id=16511
+TenantB -> topic=tenantB.bronze.raw key=17815 ts=2026-03-01 01:34:28 location_id=17815 sensor_id=31186
+TenantB -> topic=tenantB.bronze.raw key=5768 ts=2026-03-01 01:30:52 location_id=5768 sensor_id=11424
+TenantB -> topic=tenantB.bronze.raw key=54462 ts=2026-03-01 01:33:12 location_id=54462 sensor_id=67682
+TenantB -> topic=tenantB.bronze.raw key=68636 ts=2026-03-01 01:34:51 location_id=68636 sensor_id=58338
+TenantB -> topic=tenantB.bronze.raw key=81107 ts=2026-03-01 01:32:56 location_id=81107 sensor_id=46217
+TenantB -> topic=tenantB.bronze.raw key=72401 ts=2026-03-01 01:34:36 location_id=72401 sensor_id=82681
+TenantB -> topic=tenantB.bronze.raw key=79975 ts=2026-03-01 01:31:03 location_id=79975 sensor_id=88712
+TenantB -> topic=tenantB.bronze.raw key=37345 ts=2026-03-01 01:34:12 location_id=37345 sensor_id=51272
+TenantB -> topic=tenantB.bronze.raw key=72957 ts=2026-03-01 01:33:11 location_id=72957 sensor_id=83090
+TenantB -> topic=tenantB.bronze.raw key=32099 ts=2026-03-01 01:36:05 location_id=32099 sensor_id=46394
+TenantB -> topic=tenantB.bronze.raw key=66406 ts=2026-03-01 01:36:10 location_id=66406 sensor_id=21918
+TenantB -> topic=tenantB.bronze.raw key=22228 ts=2026-03-01 01:33:03 location_id=22228 sensor_id=36185
+TenantB -> topic=tenantB.bronze.raw key=28640 ts=2026-03-01 01:36:01 location_id=28640 sensor_id=43017
+TenantB -> topic=tenantB.bronze.raw key=81379 ts=2026-03-01 01:35:19 location_id=81379 sensor_id=89700
+TenantB -> topic=tenantB.bronze.raw key=17573 ts=2026-03-01 01:34:03 location_id=17573 sensor_id=30862
+TenantB -> topic=tenantB.bronze.raw key=31118 ts=2026-03-01 01:35:57 location_id=31118 sensor_id=45385
+TenantB -> topic=tenantB.bronze.raw key=3623 ts=2026-03-01 01:34:57 location_id=3623 sensor_id=7163
+TenantB -> topic=tenantB.bronze.raw key=88550 ts=2026-03-01 01:35:20 location_id=88550 sensor_id=95977
+TenantB -> topic=tenantB.bronze.raw key=74736 ts=2026-03-01 01:35:41 location_id=74736 sensor_id=36525
+TenantB -> topic=tenantB.bronze.raw key=15592 ts=2026-03-01 01:34:35 location_id=15592 sensor_id=28336
+TenantB -> topic=tenantB.bronze.raw key=10739 ts=2026-03-01 01:34:47 location_id=10739 sensor_id=21162
+TenantB -> topic=tenantB.bronze.raw key=38393 ts=2026-03-01 01:33:52 location_id=38393 sensor_id=52480
+TenantB -> topic=tenantB.bronze.raw key=49393 ts=2026-03-01 01:35:26 location_id=49393 sensor_id=63263
+TenantB -> topic=tenantB.bronze.raw key=84888 ts=2026-03-01 01:33:56 location_id=84888 sensor_id=92711
+TenantB -> topic=tenantB.bronze.raw key=28147 ts=2026-03-01 01:35:16 location_id=28147 sensor_id=42519
+TenantB -> topic=tenantB.bronze.raw key=69922 ts=2026-03-01 01:35:21 location_id=69922 sensor_id=80567
+TenantB -> topic=tenantB.bronze.raw key=75961 ts=2026-03-01 01:34:17 location_id=75961 sensor_id=55996
+TenantB -> topic=tenantB.bronze.raw key=61186 ts=2026-03-01 01:36:05 location_id=61186 sensor_id=73005
+TenantB -> topic=tenantB.bronze.raw key=41075 ts=2026-03-01 01:33:58 location_id=41075 sensor_id=55199
+TenantB -> topic=tenantB.bronze.raw key=71028 ts=2026-03-01 01:35:11 location_id=71028 sensor_id=81619
+TenantB -> topic=tenantB.bronze.raw key=17168 ts=2026-03-01 01:36:11 location_id=17168 sensor_id=30378
+TenantB -> topic=tenantB.bronze.raw key=70799 ts=2026-03-01 01:36:03 location_id=70799 sensor_id=81337
+TenantB -> topic=tenantB.bronze.raw key=6376 ts=2026-03-01 01:35:10 location_id=6376 sensor_id=12622
+TenantB -> topic=tenantB.bronze.raw key=75299 ts=2026-03-01 01:34:52 location_id=75299 sensor_id=84985
+TenantB -> topic=tenantB.bronze.raw key=30667 ts=2026-03-01 01:34:11 location_id=30667 sensor_id=44934
+TenantB -> topic=tenantB.bronze.raw key=17777 ts=2026-03-01 01:33:58 location_id=17777 sensor_id=31128
+TenantB -> topic=tenantB.bronze.raw key=64227 ts=2026-03-01 01:34:32 location_id=64227 sensor_id=75634
+TenantB -> topic=tenantB.bronze.raw key=3728 ts=2026-03-01 01:33:48 location_id=3728 sensor_id=7375
+TenantB -> topic=tenantB.bronze.raw key=73465 ts=2026-03-01 01:35:05 location_id=73465 sensor_id=83248
+TenantB -> topic=tenantB.bronze.raw key=67750 ts=2026-03-01 01:33:55 location_id=67750 sensor_id=78453
+TenantB -> topic=tenantB.bronze.raw key=81257 ts=2026-03-01 01:34:14 location_id=81257 sensor_id=89592
+TenantB -> topic=tenantB.bronze.raw key=61524 ts=2026-03-01 01:34:08 location_id=61524 sensor_id=73296
+TenantB -> topic=tenantB.bronze.raw key=3293 ts=2026-03-01 01:33:42 location_id=3293 sensor_id=6520
+TenantB -> topic=tenantB.bronze.raw key=28159 ts=2026-03-01 01:35:58 location_id=28159 sensor_id=42526
+TenantB -> topic=tenantB.bronze.raw key=73327 ts=2026-03-01 01:33:45 location_id=73327 sensor_id=83401
+TenantB -> topic=tenantB.bronze.raw key=17927 ts=2026-03-01 01:35:00 location_id=17927 sensor_id=31298
+TenantB -> topic=tenantB.bronze.raw key=10642 ts=2026-03-01 01:35:50 location_id=10642 sensor_id=20966
+TenantB -> topic=tenantB.bronze.raw key=31765 ts=2026-03-01 01:36:08 location_id=31765 sensor_id=46033
+TenantB -> topic=tenantB.bronze.raw key=79949 ts=2026-03-01 01:35:40 location_id=79949 sensor_id=86218
+TenantB -> topic=tenantB.bronze.raw key=12600 ts=2026-03-01 01:34:36 location_id=12600 sensor_id=24422
+TenantB -> topic=tenantB.bronze.raw key=6516 ts=2026-03-01 01:35:38 location_id=6516 sensor_id=12896
+TenantB -> topic=tenantB.bronze.raw key=27247 ts=2026-03-01 01:37:11 location_id=27247 sensor_id=41514
+TenantB -> topic=tenantB.bronze.raw key=59925 ts=2026-03-01 01:35:36 location_id=59925 sensor_id=72061
+TenantB -> topic=tenantB.bronze.raw key=8838 ts=2026-03-01 01:35:03 location_id=8838 sensor_id=17441
+TenantB -> topic=tenantB.bronze.raw key=17708 ts=2026-03-01 01:37:09 location_id=17708 sensor_id=31042
+TenantB -> topic=tenantB.bronze.raw key=6627 ts=2026-03-01 01:36:56 location_id=6627 sensor_id=13122
+TenantB -> topic=tenantB.bronze.raw key=6591 ts=2026-03-01 01:36:06 location_id=6591 sensor_id=13048
+TenantB -> topic=tenantB.bronze.raw key=77484 ts=2026-03-01 01:35:49 location_id=77484 sensor_id=86370
+TenantB -> topic=tenantB.bronze.raw key=85038 ts=2026-03-01 01:36:22 location_id=85038 sensor_id=92751
+TenantB -> topic=tenantB.bronze.raw key=81139 ts=2026-03-01 01:35:31 location_id=81139 sensor_id=89510
+TenantB -> topic=tenantB.bronze.raw key=83364 ts=2026-03-01 01:34:54 location_id=83364 sensor_id=91034
+TenantB -> topic=tenantB.bronze.raw key=8368 ts=2026-03-01 01:36:23 location_id=8368 sensor_id=16510
+TenantB -> topic=tenantB.bronze.raw key=69982 ts=2026-03-01 01:34:57 location_id=69982 sensor_id=80625
+TenantB -> topic=tenantB.bronze.raw key=78359 ts=2026-03-01 01:36:01 location_id=78359 sensor_id=87426
+TenantB -> topic=tenantB.bronze.raw key=7323 ts=2026-03-01 01:35:58 location_id=7323 sensor_id=14475
+TenantB -> topic=tenantB.bronze.raw key=38141 ts=2026-03-01 01:35:40 location_id=38141 sensor_id=3177
+TenantB -> topic=tenantB.bronze.raw key=3540 ts=2026-03-01 01:37:14 location_id=3540 sensor_id=7000
+TenantB -> topic=tenantB.bronze.raw key=89693 ts=2026-03-01 01:36:22 location_id=89693 sensor_id=45078
+TenantB -> topic=tenantB.bronze.raw key=89454 ts=2026-03-01 01:36:55 location_id=89454 sensor_id=62930
+TenantB -> topic=tenantB.bronze.raw key=16737 ts=2026-03-01 01:36:36 location_id=16737 sensor_id=9984
+TenantB -> topic=tenantB.bronze.raw key=83636 ts=2026-03-01 01:36:49 location_id=83636 sensor_id=91200
+TenantB -> topic=tenantB.bronze.raw key=8192 ts=2026-03-01 01:36:04 location_id=8192 sensor_id=16172
+TenantB -> topic=tenantB.bronze.raw key=1649 ts=2026-03-01 01:35:12 location_id=1649 sensor_id=3275
+TenantB -> topic=tenantB.bronze.raw key=62754 ts=2026-03-01 01:36:48 location_id=62754 sensor_id=74270
+TenantB -> topic=tenantB.bronze.raw key=67903 ts=2026-03-01 01:35:49 location_id=67903 sensor_id=64986
+TenantB -> topic=tenantB.bronze.raw key=75426 ts=2026-03-01 01:36:08 location_id=75426 sensor_id=85083
+TenantB -> topic=tenantB.bronze.raw key=82636 ts=2026-03-01 01:36:05 location_id=82636 sensor_id=90575
+TenantB -> topic=tenantB.bronze.raw key=81276 ts=2026-03-01 01:37:11 location_id=81276 sensor_id=87017
+TenantB -> topic=tenantB.bronze.raw key=84512 ts=2026-03-01 01:34:59 location_id=84512 sensor_id=92377
+TenantB -> topic=tenantB.bronze.raw key=88494 ts=2026-03-01 01:36:55 location_id=88494 sensor_id=96195
+TenantB -> topic=tenantB.bronze.raw key=91330 ts=2026-03-01 01:36:50 location_id=91330 sensor_id=95171
+TenantB -> topic=tenantB.bronze.raw key=29616 ts=2026-03-01 01:35:34 location_id=29616 sensor_id=7441
+TenantB -> topic=tenantB.bronze.raw key=13894 ts=2026-03-01 01:35:34 location_id=13894 sensor_id=26139
+TenantB -> topic=tenantB.bronze.raw key=25708 ts=2026-03-01 01:35:11 location_id=25708 sensor_id=40015
+TenantB -> topic=tenantB.bronze.raw key=77267 ts=2026-03-01 01:32:54 location_id=77267 sensor_id=37434
+TenantB -> topic=tenantB.bronze.raw key=64480 ts=2026-03-01 01:35:23 location_id=64480 sensor_id=75838
+TenantB -> topic=tenantB.bronze.raw key=76770 ts=2026-03-01 01:36:17 location_id=76770 sensor_id=86116
+TenantB -> topic=tenantB.bronze.raw key=9356 ts=2026-03-01 01:33:44 location_id=9356 sensor_id=18454
+TenantB -> topic=tenantB.bronze.raw key=87129 ts=2026-03-01 01:36:21 location_id=87129 sensor_id=94867
+TenantB -> topic=tenantB.bronze.raw key=33483 ts=2026-03-01 01:35:51 location_id=33483 sensor_id=47726
+TenantB -> topic=tenantB.bronze.raw key=4772 ts=2026-03-01 01:34:51 location_id=4772 sensor_id=9467
+TenantB -> topic=tenantB.bronze.raw key=63902 ts=2026-03-01 01:36:53 location_id=63902 sensor_id=67931
+TenantB -> topic=tenantB.bronze.raw key=57181 ts=2026-03-01 01:37:12 location_id=57181 sensor_id=63857
+TenantB -> topic=tenantB.bronze.raw key=28718 ts=2026-03-01 01:36:52 location_id=28718 sensor_id=43105
+TenantB -> topic=tenantB.bronze.raw key=1284 ts=2026-03-01 01:36:58 location_id=1284 sensor_id=2548
+TenantB -> topic=tenantB.bronze.raw key=27766 ts=2026-03-01 01:35:43 location_id=27766 sensor_id=42110
+TenantB -> topic=tenantB.bronze.raw key=40337 ts=2026-03-01 01:36:54 location_id=40337 sensor_id=54428
+TenantB -> topic=tenantB.bronze.raw key=24784 ts=2026-03-01 01:37:50 location_id=24784 sensor_id=39016
+TenantB -> topic=tenantB.bronze.raw key=41275 ts=2026-03-01 01:33:31 location_id=41275 sensor_id=21547
+TenantB -> topic=tenantB.bronze.raw key=8431 ts=2026-03-01 01:37:59 location_id=8431 sensor_id=16634
+TenantB -> topic=tenantB.bronze.raw key=84448 ts=2026-03-01 01:37:26 location_id=84448 sensor_id=92316
+TenantB -> topic=tenantB.bronze.raw key=83138 ts=2026-03-01 01:35:12 location_id=83138 sensor_id=37173
+TenantB -> topic=tenantB.bronze.raw key=8222 ts=2026-03-01 01:36:52 location_id=8222 sensor_id=16229
+TenantB -> topic=tenantB.bronze.raw key=80591 ts=2026-03-01 01:36:52 location_id=80591 sensor_id=89109
+TenantB -> topic=tenantB.bronze.raw key=70440 ts=2026-03-01 01:37:05 location_id=70440 sensor_id=80981
+TenantB -> topic=tenantB.bronze.raw key=37195 ts=2026-03-01 01:35:48 location_id=37195 sensor_id=47034
+TenantB -> topic=tenantB.bronze.raw key=83594 ts=2026-03-01 01:35:51 location_id=83594 sensor_id=91147
+TenantB -> topic=tenantB.bronze.raw key=30134 ts=2026-03-01 01:36:02 location_id=30134 sensor_id=44429
+TenantB -> topic=tenantB.bronze.raw key=29352 ts=2026-03-01 01:38:03 location_id=29352 sensor_id=43740
+TenantB -> topic=tenantB.bronze.raw key=3628 ts=2026-03-01 01:36:49 location_id=3628 sensor_id=7173
+TenantB -> topic=tenantB.bronze.raw key=34223 ts=2026-03-01 01:36:03 location_id=34223 sensor_id=48413
+TenantB -> topic=tenantB.bronze.raw key=62820 ts=2026-03-01 01:37:12 location_id=62820 sensor_id=74382
+TenantB -> topic=tenantB.bronze.raw key=46196 ts=2026-03-01 01:36:25 location_id=46196 sensor_id=60352
+TenantB -> topic=tenantB.bronze.raw key=17263 ts=2026-03-01 01:38:06 location_id=17263 sensor_id=30473
+TenantB -> topic=tenantB.bronze.raw key=63743 ts=2026-03-01 01:37:07 location_id=63743 sensor_id=70098
+TenantB -> topic=tenantB.bronze.raw key=87743 ts=2026-03-01 01:37:53 location_id=87743 sensor_id=95526
+TenantB -> topic=tenantB.bronze.raw key=3650 ts=2026-03-01 01:36:32 location_id=3650 sensor_id=7217
+TenantB -> topic=tenantB.bronze.raw key=88336 ts=2026-03-01 01:37:32 location_id=88336 sensor_id=96063
+TenantB -> topic=tenantB.bronze.raw key=40360 ts=2026-03-01 01:37:16 location_id=40360 sensor_id=54125
+TenantB -> topic=tenantB.bronze.raw key=43499 ts=2026-03-01 01:37:58 location_id=43499 sensor_id=57667
+TenantB -> topic=tenantB.bronze.raw key=47978 ts=2026-03-01 01:37:52 location_id=47978 sensor_id=62024
+TenantB -> topic=tenantB.bronze.raw key=62436 ts=2026-03-01 01:37:24 location_id=62436 sensor_id=74077
+TenantB -> topic=tenantB.bronze.raw key=83284 ts=2026-03-01 01:36:35 location_id=83284 sensor_id=90986
+TenantB -> topic=tenantB.bronze.raw key=90382 ts=2026-03-01 01:36:40 location_id=90382 sensor_id=97535
+TenantB -> topic=tenantB.bronze.raw key=90290 ts=2026-03-01 01:35:58 location_id=90290 sensor_id=97509
+TenantB -> topic=tenantB.bronze.raw key=61953 ts=2026-03-01 01:36:47 location_id=61953 sensor_id=73656
+TenantB -> topic=tenantB.bronze.raw key=13500 ts=2026-03-01 01:37:57 location_id=13500 sensor_id=8654
+TenantB -> topic=tenantB.bronze.raw key=66809 ts=2026-03-01 01:38:11 location_id=66809 sensor_id=46381
+TenantB -> topic=tenantB.bronze.raw key=74433 ts=2026-03-01 01:37:09 location_id=74433 sensor_id=84277
+TenantB -> topic=tenantB.bronze.raw key=21191 ts=2026-03-01 01:36:42 location_id=21191 sensor_id=34987
