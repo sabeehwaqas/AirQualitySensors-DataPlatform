@@ -93,6 +93,13 @@
     RUN TERMIAL: 
         ./teardown.sh --volumes  # wipes Kafka data
 
+eq
+
+
+
+
+
+
 
 
 
