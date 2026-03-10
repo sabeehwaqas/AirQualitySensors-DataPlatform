@@ -180,6 +180,10 @@ echo " To run manual workers:"
 echo "  python3 streamingestworker.py --tenant tenantA --cassandra 127.0.0.1"
 echo "  python3 streamingestworker.py --tenant tenantB --cassandra 127.0.0.1"
 
+#!/usr/bin/env bash
+# bootstrap_silver.sh
+# Run this AFTER bootstrap.sh to add silver schema.
+# Or paste the cql() calls below into your existing bootstrap.sh.
 
 set -euo pipefail
 
@@ -236,19 +240,35 @@ cql "CREATE TABLE IF NOT EXISTS tenantB_silver.geo_measurements (
     ) WITH CLUSTERING ORDER BY (silver_ts DESC);"
 
 # Silver pipeline run logs (all tenants)
+# Includes: transform_sec, extract_sec, data_size_bytes, cache_mode for P2.4/P2.5
 cql "CREATE TABLE IF NOT EXISTS platform_logs.silver_pipeline_logs (
-        tenant_id       text,
-        run_id          text,
-        started_at      text,
-        finished_at     text,
-        status          text,
-        records_loaded  bigint,
-        errors          bigint,
-        elapsed_sec     double,
-        pipeline_script text,
-        detail          text,
+        tenant_id        text,
+        run_id           text,
+        started_at       text,
+        finished_at      text,
+        status           text,
+        records_loaded   bigint,
+        errors           bigint,
+        elapsed_sec      double,
+        extract_sec      double,
+        transform_sec    double,
+        data_size_bytes  bigint,
+        cache_mode       text,
+        pipeline_script  text,
+        detail           text,
         PRIMARY KEY ((tenant_id), started_at)
     ) WITH CLUSTERING ORDER BY (started_at DESC);"
+
+# ALTER TABLE is idempotent-safe: if columns already exist Cassandra returns an
+# error which we suppress with || true. This handles the case where an old volume
+# has the table WITHOUT the P2.4/P2.5 columns (CREATE TABLE IF NOT EXISTS is a
+# no-op on an existing table, so ALTER is the only way to add missing columns).
+echo "==> Ensuring P2.4/P2.5 columns exist in silver_pipeline_logs (safe to re-run)..."
+cql "ALTER TABLE platform_logs.silver_pipeline_logs ADD extract_sec double;"     2>/dev/null || true
+cql "ALTER TABLE platform_logs.silver_pipeline_logs ADD transform_sec double;"   2>/dev/null || true
+cql "ALTER TABLE platform_logs.silver_pipeline_logs ADD data_size_bytes bigint;" 2>/dev/null || true
+cql "ALTER TABLE platform_logs.silver_pipeline_logs ADD cache_mode text;"        2>/dev/null || true
+echo "==> Columns verified."
 
 # Watermark table (tracks last processed bronze ingest_ts per tenant)
 cql "CREATE TABLE IF NOT EXISTS platform_logs.silver_watermarks (

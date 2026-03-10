@@ -6,3 +6,4 @@ cassandra-driver
 requests
 pyyaml
 apscheduler
+google-cloud-storage

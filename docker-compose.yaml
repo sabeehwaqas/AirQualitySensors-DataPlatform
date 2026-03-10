@@ -105,12 +105,15 @@ services:
       TENANT_CONFIGS_DIR: "/app/tenant_configs"
       CACHE_BASE_DIR: "/app/cache"
       BATCH_MANAGER_PORT: "8003"
+      GCS_BUCKET: "airqualitybdpasg" # <-- add this
+      GOOGLE_APPLICATION_CREDENTIALS: "/app/gcp-key.json" # <-- add this
     ports:
       - "8003:8003"
     volumes:
       # Mount cache dirs so pipeline cache files persist between runs
       - ./cache:/app/cache
       - ./logs:/app/logs
+      - ./gcp-key.json:/app/gcp-key.json # <-- add this mount
     command: ["python", "batchmanager.py"]
 
 volumes:

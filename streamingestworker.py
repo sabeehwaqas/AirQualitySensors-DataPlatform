@@ -67,7 +67,7 @@ def send_report(monitor_url: str, report: Dict[str, Any]) -> None:
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--tenant", required=True, choices=["tenantA", "tenantB"])
-    parser.add_argument("--kafka", default="broker:9092")
+    parser.add_argument("--kafka", default=os.getenv("KAFKA_BOOTSTRAP", "broker:29092"))
     parser.add_argument("--cassandra", default="cassandra")
     parser.add_argument("--group", default=None)
 
@@ -98,9 +98,24 @@ def main():
     monitor_url = (args.monitor_url or "").strip()
     window_sec = max(1, int(args.report_window_sec))
 
-    # Cassandra connection
-    cluster = Cluster([args.cassandra])
-    session = cluster.connect()
+    # Cassandra connection — retry loop so worker survives slow Cassandra startup
+    cluster = None
+    session = None
+    for _attempt in range(1, 13):
+        try:
+            cluster = Cluster([args.cassandra])
+            session = cluster.connect()
+            # Verify schema is ready by preparing the insert immediately
+            insert_cql_test = f"SELECT sensor_id FROM tenantA_bronze.records LIMIT 1"                 if tenant == "tenantA" else                 f"SELECT location_id FROM tenantB_bronze.records LIMIT 1"
+            session.execute(insert_cql_test)
+            print(f"✅ Cassandra connected (attempt {_attempt})")
+            break
+        except Exception as e:
+            print(f"⏳ Cassandra not ready (attempt {_attempt}/12): {type(e).__name__}: {e}. Retrying in 5s...")
+            if _attempt == 12:
+                print("❌ Could not connect to Cassandra. Exiting.")
+                raise
+            time.sleep(5)
 
     insert_cql = f"""
     INSERT INTO {keyspace}.{table}

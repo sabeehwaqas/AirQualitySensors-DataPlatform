@@ -7,10 +7,17 @@
 
 0. install pip install confluent-kafka cassandra-driver
 
+
+0.1 follow Setup-GCP-GUIDE
+
+
+
+
 1. make them executed able:
   RUN TERMIAL: 
       chmod +x bootstrap.sh run_producers.sh teardown.sh
 
+1.5 docker compose build --no-cache
 
 2. deploye kafka
   RUN TERMIAL: ./bootstrap.sh
@@ -56,7 +63,6 @@
 4.Start TenantA worker and Start TenantB worker:
   RUN IN TERMINAL: 
   curl -X POST http://localhost:8001/tenants/tenantA/workers/start -H "Content-Type: application/json" -d '{}'
-  
   curl -X POST http://localhost:8001/tenants/tenantB/workers/start -H "Content-Type: application/json" -d '{}'
 
   4.1 List workers:
@@ -86,6 +92,13 @@
 7. Check alerts from monitor to manager:
     IN WEB: 
         http://localhost:8001/monitor/alerts
+
+
+8. see the watermark: -- in cqlsh
+SELECT * FROM platform_logs.silver_watermarks;
+
+9. see the silverpipeline logs:
+SELECT * FROM platform_logs.silver_pipeline_logs LIMIT 10;
 
 999. shutdown and delete kafka
     RUN TERMIAL: 
