@@ -4,3 +4,5 @@ docker
 confluent-kafka
 cassandra-driver
 requests
+pyyaml
+apscheduler

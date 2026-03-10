@@ -179,3 +179,87 @@ echo "______________________ "
 echo " To run manual workers:"
 echo "  python3 streamingestworker.py --tenant tenantA --cassandra 127.0.0.1"
 echo "  python3 streamingestworker.py --tenant tenantB --cassandra 127.0.0.1"
+
+
+set -euo pipefail
+
+CASSANDRA_SERVICE="cassandra"
+
+# Detect network (same logic as bootstrap.sh)
+CID="$(docker compose ps -q 2>/dev/null | head -n 1 || true)"
+COMPOSE_NETWORK="$(docker inspect -f '{{range $k,$v := .NetworkSettings.Networks}}{{println $k}}{{end}}' "${CID}" | head -n 1 || true)"
+echo "✅ Using network: ${COMPOSE_NETWORK}"
+
+cql() {
+  docker run --rm --network "${COMPOSE_NETWORK}" cassandra:4.1 \
+    cqlsh "${CASSANDRA_SERVICE}" 9042 -e "$1"
+}
+
+echo "==> Creating Silver keyspaces/tables..."
+
+# TenantA silver table
+cql "CREATE KEYSPACE IF NOT EXISTS tenantA_silver WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};"
+cql "CREATE TABLE IF NOT EXISTS tenantA_silver.air_quality (
+        sensor_id   text,
+        silver_ts   text,
+        event_ts    text,
+        event_id    bigint,
+        ingest_ts   text,
+        lat         double,
+        lon         double,
+        alt         double,
+        country     text,
+        sensor_type text,
+        pm10        double,
+        pm2_5       double,
+        aqi_bucket  text,
+        PRIMARY KEY ((sensor_id), silver_ts)
+    ) WITH CLUSTERING ORDER BY (silver_ts DESC);"
+
+# TenantB silver table
+cql "CREATE KEYSPACE IF NOT EXISTS tenantB_silver WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};"
+cql "CREATE TABLE IF NOT EXISTS tenantB_silver.geo_measurements (
+        location_id text,
+        silver_ts   text,
+        event_ts    text,
+        event_id    bigint,
+        ingest_ts   text,
+        lat         double,
+        lon         double,
+        alt         double,
+        country     text,
+        sensor_id   text,
+        pm10        double,
+        pm2_5       double,
+        has_pm_data boolean,
+        PRIMARY KEY ((location_id), silver_ts)
+    ) WITH CLUSTERING ORDER BY (silver_ts DESC);"
+
+# Silver pipeline run logs (all tenants)
+cql "CREATE TABLE IF NOT EXISTS platform_logs.silver_pipeline_logs (
+        tenant_id       text,
+        run_id          text,
+        started_at      text,
+        finished_at     text,
+        status          text,
+        records_loaded  bigint,
+        errors          bigint,
+        elapsed_sec     double,
+        pipeline_script text,
+        detail          text,
+        PRIMARY KEY ((tenant_id), started_at)
+    ) WITH CLUSTERING ORDER BY (started_at DESC);"
+
+# Watermark table (tracks last processed bronze ingest_ts per tenant)
+cql "CREATE TABLE IF NOT EXISTS platform_logs.silver_watermarks (
+        tenant_id          text PRIMARY KEY,
+        last_processed_ts  text
+    );"
+
+echo "✅ Silver schema created."
+echo ""
+echo "To verify:"
+echo "  docker exec -it cqlsh cqlsh cassandra 9042"
+echo "  SELECT * FROM tenantA_silver.air_quality LIMIT 5;"
+echo "  SELECT * FROM tenantB_silver.geo_measurements LIMIT 5;"
+echo "  SELECT * FROM platform_logs.silver_pipeline_logs LIMIT 10;"

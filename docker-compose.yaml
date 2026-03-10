@@ -3,26 +3,16 @@ services:
     image: apache/kafka:3.7.2
     container_name: broker
     ports:
-      - "9092:9092" # external (host access)
+      - "9092:9092"
     environment:
       KAFKA_NODE_ID: 1
       KAFKA_PROCESS_ROLES: broker,controller
-
-      # 3 listeners: INTERNAL, EXTERNAL, CONTROLLER
       KAFKA_LISTENERS: INTERNAL://0.0.0.0:29092,EXTERNAL://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093
-
-      # What the broker tells clients to use:
-      # - containers should use broker:29092
-      # - your Mac should use localhost:9092
       KAFKA_ADVERTISED_LISTENERS: INTERNAL://broker:29092,EXTERNAL://localhost:9092
-
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT,CONTROLLER:PLAINTEXT
       KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
       KAFKA_CONTROLLER_QUORUM_VOTERS: 1@broker:9093
-
-      # Optional but clean
       KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
-
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
@@ -51,7 +41,6 @@ services:
     volumes:
       - cassandra_data:/var/lib/cassandra
 
-  # Interactive CQL shell you can always enter
   cqlsh:
     image: cassandra:4.1
     container_name: cqlsh
@@ -59,7 +48,6 @@ services:
       - cassandra
     entrypoint: ["bash", "-lc", "sleep infinity"]
 
-  # Manager API (starts/stops worker containers)
   streamingestmanager:
     build:
       context: .
@@ -70,25 +58,19 @@ services:
       - broker
       - cassandra
     environment:
-      # Manager uses these when launching workers
       KAFKA_BOOTSTRAP: "broker:29092"
       CASSANDRA_HOST: "cassandra"
       MONITOR_URL: "http://streamingestmonitor:8002"
       REPORT_WINDOW_SEC: "10"
-      # It will auto-detect network name, but we also set a label
       MANAGER_NAME: "mysimbdp-streamingestmanager"
     ports:
       - "8001:8001"
     volumes:
-      # CRITICAL: allow manager to create/stop containers
       - /var/run/docker.sock:/var/run/docker.sock
-      # Persist manager state (so it remembers what it started)
       - ./state:/app/state
       - ./logs:/app/logs
-    command:
-      ["python", "streamingestmanager.py"]
+    command: ["python", "streamingestmanager.py"]
 
-      # Monitor API (receives reports + persists to Cassandra)
   streamingestmonitor:
     build:
       context: .
@@ -102,11 +84,34 @@ services:
       CASSANDRA_HOST: "cassandra"
       MONITOR_PORT: "8002"
       MANAGER_URL: "http://streamingestmanager:8001"
-      MAX_AVG_INGEST_MS: "50" #<------- CHANGE MAX_AVG_INGEST_MS to (e.g 0.1) see the alert api | Default : 50
+      MAX_AVG_INGEST_MS: "50"
       MIN_RECORDS_PER_WINDOW: "1"
     ports:
       - "8002:8002"
     command: ["python", "streamingestmonitor.py"]
+
+  # ── Part 2: Batch Manager ─────────────────────────────────────────────────
+  batchmanager:
+    build:
+      context: .
+      dockerfile: Dockerfile.platform
+    image: mysimbdp-platform:latest
+    container_name: batchmanager
+    depends_on:
+      cassandra:
+        condition: service_healthy
+    environment:
+      CASSANDRA_HOST: "cassandra"
+      TENANT_CONFIGS_DIR: "/app/tenant_configs"
+      CACHE_BASE_DIR: "/app/cache"
+      BATCH_MANAGER_PORT: "8003"
+    ports:
+      - "8003:8003"
+    volumes:
+      # Mount cache dirs so pipeline cache files persist between runs
+      - ./cache:/app/cache
+      - ./logs:/app/logs
+    command: ["python", "batchmanager.py"]
 
 volumes:
   cassandra_data:
