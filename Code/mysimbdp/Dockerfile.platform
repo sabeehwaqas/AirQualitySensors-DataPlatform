@@ -1,0 +1,78 @@
+# =============================================================================
+# Dockerfile.platform  —  mysimbdp Platform Docker Image
+# =============================================================================
+#
+# WHAT THIS BUILDS
+# ----------------
+# A single shared Docker image (mysimbdp-platform:latest) used by:
+#   - streamingestmanager  (port 8001)
+#   - streamingestmonitor  (port 8002)
+#   - batchmanager         (port 8003)
+#   - streamingestworker   (started dynamically by the manager)
+#
+# WHY ONE SHARED IMAGE?
+# Using one image for all components means:
+#   - One docker compose build --no-cache command builds everything
+#   - All components have the same Python version and dependencies
+#   - Worker containers (started by the manager at runtime) reuse the same image
+#   - Consistent environment across all services
+#
+# ENTRY POINT
+# -----------
+# The image has no default CMD. Each service specifies its own command in
+# docker-compose.yaml, e.g.:
+#   command: ["python", "streamingestmanager.py"]
+#   command: ["python", "batchmanager.py"]
+#
+# =============================================================================
+
+FROM python:3.12-slim
+
+WORKDIR /app
+
+# Install system dependencies
+# ca-certificates: needed for HTTPS requests to sensor.community API and GCS
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates \
+  && rm -rf /var/lib/apt/lists/*
+
+# Install Python dependencies
+# Copied before the source files so Docker layer caching works:
+# if requirements don't change, this layer is reused even when code changes
+COPY requirements.platform.txt /app/requirements.platform.txt
+RUN pip install --no-cache-dir -r /app/requirements.platform.txt
+
+# ── Part 1: Platform services (manager + monitor) ─────────────────────────────
+COPY platform/streamingestmanager.py  /app/streamingestmanager.py
+COPY platform/streamingestmonitor.py  /app/streamingestmonitor.py
+
+# ── Part 2: Batch manager ─────────────────────────────────────────────────────
+COPY platform/batchmanager.py         /app/batchmanager.py
+
+# ── Tenant files (worker + silver pipeline live in each tenant folder) ─────────
+# Both tenants share the same worker script — each gets its own copy in /app
+# so the container can run either tenant via --tenant flag
+COPY tenants/tenantA/streamingestworker.py   /app/streamingestworker.py
+COPY tenants/tenantA/silverpipeline_tenantA.py  /app/silverpipeline_tenantA.py
+COPY tenants/tenantB/silverpipeline_tenantB.py  /app/silverpipeline_tenantB.py
+
+# Tenant service agreements — batchmanager reads these at startup
+COPY tenants/tenantA/tenantA.yaml  /app/tenant_configs/tenantA.yaml
+COPY tenants/tenantB/tenantB.yaml  /app/tenant_configs/tenantB.yaml
+
+# Create required runtime directories
+# /app/state  — streamingestmanager stores worker state JSON here
+# /app/logs   — log files (also mounted from host via docker-compose volumes)
+# /app/cache  — silverpipeline writes .jsonl cache files here
+#               tenantA and tenantB have separate pending/ and processed/ dirs
+RUN mkdir -p /app/state /app/logs \
+             /app/cache/tenantA/pending \
+             /app/cache/tenantA/processed \
+             /app/cache/tenantB/pending \
+             /app/cache/tenantB/processed
+
+# Ports exposed by each service
+# 8001 — streamingestmanager
+# 8002 — streamingestmonitor
+# 8003 — batchmanager
+EXPOSE 8001 8002 8003
