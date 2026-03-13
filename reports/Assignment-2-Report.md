@@ -1,4 +1,4 @@
-### CREATED WITHOUT GENAI (grammerly used to fix some grammer)
+CREATED WITHOUT GENAI (grammerly used to fix some grammer)
 
 # Big Data Platforms — Assignment 2
 
@@ -15,7 +15,7 @@ The tech stack is: Apache Kafka for messaging, Cassandra as the core data store 
 
 ###### Architecture:
 
-<img src="mysimbdp_architecture-2.svg">
+<img src="./report-img/mysimbdp_architecture-2.svg">
 
 ---
 
@@ -88,13 +88,13 @@ Two workers were tested, one for tenantA (flat schema) and one for tenantB (nest
 docker logs of worker
 
 TenantA
-<img src="dockerlogsA.png" alt="isolated" width="2000"/>
+<img src="./report-img/dockerlogsA.png" alt="isolated" width="2000"/>
 
 TenantB
-<img src="dockerlogsB.png" alt="isolated" width="2000"/>
+<img src="./report-img/dockerlogsB.png" alt="isolated" width="2000"/>
 
 we can see the records inserted in bronze:
-<img src="bronzerecords.png" alt="isolated" width="2000"/>
+<img src="./report-img/bronzerecords.png" alt="isolated" width="2000"/>
 
 Under normal conditions both workers maintained average ingest latency well below the 50ms threshold (here its even below 5ms). Cassandra inserts were fast because the schema is simple (single partition key, one clusterings column).
 
@@ -108,7 +108,7 @@ cpu_quota=20000 # 20% of one CPU
 """
 Then 10,000 messages were pushed into tenantB.bronze.raw using a pytohn flood script to simulate heavy load. As seen in the attached Docker logs, ingest_ms climbed above 50ms under this situation.
 
-<img src="tenantBlow.png" alt="isolated" width="2000"/>
+<img src="./report-img/tenantBlow.png" alt="isolated" width="2000"/>
 
 ---
 
@@ -140,10 +140,10 @@ worker (every 10s) → POST /report → streamingestmonitor → persist to platf
 Tenant can access this table to observe the performance.
 
 TenantA Streamingestworker performance
-<img src="StreamingestB.png" alt="isolated" width="2000"/>
+<img src="./report-img/StreamingestB.png" alt="isolated" width="2000"/>
 
 TenantB Streamingestworker performance
-<img src="StreamingestA.png" alt="isolated" width="2000"/>
+<img src="./report-img/StreamingestA.png" alt="isolated" width="2000"/>
 
 ---
 
@@ -163,7 +163,7 @@ In docker-sompose.yaml :
 MAX_AVG_INGEST_MS: "3"
 
 http://localhost:8001/monitor/alerts:
-<img src="threashold
+<img src="./report-img/threashold
 .png" alt="isolated" width="4000"/>
 
 ---
@@ -279,39 +279,39 @@ entirely through the yaml files. Each yaml declares "pipeline_script" and the sc
 ###### Normal pipeline run:
 
 http://localhost:8003/tenants/tenantA/logs showing a successful run with records_loaded, elapsed_sec, extract_sec, transform_sec, cache_mode
-<img src="silver
+<img src="./report-img/silver
 .png" alt="isolated" width="4000"/>
 
 cqlsh showing SELECT from tenantA_silver.air_quality LIMIT 10 with actual data:
 
-<img src="silversql.png" alt="isolated" width="2000">
+<img src="./report-img/silversql.png" alt="isolated" width="2000">
 
 Similar can be seen for TenantB
 
 ###### Performance TenantA and TenantB:
 
-<img src="silverperf.png" alt="isolated" width="2000">
-<img src="silverperfB.png" alt="isolated" width="2000">
+<img src="./report-img/silverperf.png" alt="isolated" width="2000">
+<img src="./report-img/silverperfB.png" alt="isolated" width="2000">
 
 ###### Constraint violation examples TenantA:
 
 Can be done same for TenantB
 
 SLA file for tenantA:
-<img src="slafile.png" alt="isolated" width="500">
+<img src="./report-img/slafile.png" alt="isolated" width="500">
 
 _Test 1 — silver table missing:_
 
 The silver table was dropped with "DROP TABLE tenantA_silver.air_quality". The pipeline was triggered immediately. The run was blocked before any subprocess was launched.
 
-<img src="constvoil1.png" alt="isolated" width="2000">
+<img src="./report-img/constvoil1.png" alt="isolated" width="2000">
 
 **Local disk vs GCS performance:**
 
 Two runs are compared, one with "GCS_BUCKET" unset (local only) and one with it set to the GCS bucket.
 
-<img src="local.png" alt="isolated" width="2000">
-<img src="gcpandlocal.png" alt="isolated" width="2000">
+<img src="./report-img/local.png" alt="isolated" width="2000">
+<img src="./report-img/gcpandlocal.png" alt="isolated" width="2000">
 
 Same no of records moved
 
@@ -336,7 +336,7 @@ Note:Because Cassandra GROUP BY only works on partition keys, all aggregation is
 
 http://localhost:8003/stats showing the full JSON response with per_tenant and platform sections
 
-<img src="status.png" alt="isolated" width="4000">
+<img src="./report-img/status.png" alt="isolated" width="4000">
 
 TenantB ran 44 times, 36 successful, 8 constraint_violation, total records moved to silver : 1792. etc...
 
@@ -350,8 +350,8 @@ TenantB ran 44 times, 36 successful, 8 constraint_violation, total records moved
 
 Shows the Tenant's Silver pipleine statistics and logs, we can see no of recards loaded per run, , the start and end time of run, the status of run i.e. success or any constraint issue, time taken, the time taken to extract from bronze and time taken to perform transformation , size of data in bytes and finally the cache mode
 
-<img src="stats.png" alt="isolated" width="4000">
-<img src="stats2.png" alt="isolated" width="4000">
+<img src="./report-img/stats.png" alt="isolated" width="4000">
+<img src="./report-img/stats2.png" alt="isolated" width="4000">
 
 ---
 
@@ -361,7 +361,7 @@ Shows the Tenant's Silver pipleine statistics and logs, we can see no of recards
 
 The diagram below shows how logging and monitoring flows across both Part 1 (streaming) and Part 2 (silver transformation)
 
-<img src="zoom2.png" alt="isolated" width="2000">
+<img src="./report-img/zoom2.png" alt="isolated" width="2000">
 
 ###### Workflow of performance:
 

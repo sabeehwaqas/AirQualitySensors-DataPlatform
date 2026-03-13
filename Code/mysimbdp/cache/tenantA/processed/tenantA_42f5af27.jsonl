@@ -1,3 +1,0 @@
-{"sensor_id": "54275", "ingest_ts": "2026-03-13 03:20:53.349000", "event_ts": "2026-03-13 03:19:42", "event_id": 28555968192, "lat": 53.2477337, "lon": 6.137237, "alt": 0.0, "country": "NL", "sensor_type": "SDS011", "pm10_P1": 1999.9, "pm2_5_P2": 999.9}
-{"sensor_id": "66293", "ingest_ts": "2026-03-13 03:20:47.280000", "event_ts": "2026-03-13 03:19:07", "event_id": 28555963206, "lat": 55.83495287406, "lon": 37.17927718117, "alt": 179.5, "country": "RU", "sensor_type": "BME280", "pm10_P1": null, "pm2_5_P2": null}
-{"sensor_id": "59190", "ingest_ts": "2026-03-13 03:20:59.017000", "event_ts": "2026-03-13 03:18:01", "event_id": 28555954120, "lat": 51.636, "lon": 4.948, "alt": 5.3, "country": "NL", "sensor_type": "BME280", "pm10_P1": null, "pm2_5_P2": null}

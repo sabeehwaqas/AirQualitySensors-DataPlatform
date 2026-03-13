@@ -1,2 +1,0 @@
-{"sensor_id": "58152", "ingest_ts": "2026-03-13 02:41:07.102000", "event_ts": "2026-03-13 02:35:34", "event_id": 28555603946, "lat": 51.634, "lon": 5.566, "alt": 7.7, "country": "NL", "sensor_type": "SDS011", "pm10_P1": 8.77, "pm2_5_P2": 2.2}
-{"sensor_id": "14006", "ingest_ts": "2026-03-13 02:41:05.059000", "event_ts": "2026-03-13 02:39:21", "event_id": 28555636412, "lat": 51.542, "lon": 7.314, "alt": 81.0, "country": "DE", "sensor_type": "DHT22", "pm10_P1": null, "pm2_5_P2": null}
