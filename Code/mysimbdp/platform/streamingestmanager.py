@@ -229,8 +229,8 @@ def start_workers(tenant_id: str, req: StartReq):
             # ── P1.3: Uncomment to test under-provisioned workers ─────────────
             # Throttle memory and CPU to simulate an overloaded worker.
             # This raises avg_ingest_ms, triggering monitor threshold alerts.
-            # mem_limit="256m",      # max 256 MB RAM
-            # cpu_quota=50000,       # 50% of 1 CPU (100000 = full CPU)
+            mem_limit="128m",      # max 128 MB RAM
+            cpu_quota=10000,       # 10% of 1 CPU (100000 = full CPU)
         )
         cid = c.id
 

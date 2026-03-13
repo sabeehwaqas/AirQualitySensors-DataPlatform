@@ -84,7 +84,7 @@ services:
       CASSANDRA_HOST: "cassandra"
       MONITOR_PORT: "8002"
       MANAGER_URL: "http://streamingestmanager:8001"
-      MAX_AVG_INGEST_MS: "50"
+      MAX_AVG_INGEST_MS: "3"
       MIN_RECORDS_PER_WINDOW: "1"
     ports:
       - "8002:8002"
@@ -105,7 +105,7 @@ services:
       TENANT_CONFIGS_DIR: "/app/tenant_configs"
       CACHE_BASE_DIR: "/app/cache"
       BATCH_MANAGER_PORT: "8003"
-      GCS_BUCKET: "airqualitybdpasg" # <-- add this
+      #GCS_BUCKET: "airqualitybdpasg" # <-- add this
       GOOGLE_APPLICATION_CREDENTIALS: "/app/gcp-key.json" # <-- add this
     ports:
       - "8003:8003"

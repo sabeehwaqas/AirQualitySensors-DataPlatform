@@ -1,3 +1,5 @@
+### CREATED WITHOUT GENAI
+
 # mysimbdp Deployment Guide
 
 ## Folder structure (what goes where)
@@ -91,13 +93,13 @@ You should see: broker, cassandra, cqlsh, streamingestmanager, streamingestmonit
 This creates all Kafka topics and Cassandra tables. Wait until you see `✅ Bootstrap complete.`
 
 ```bash
-./bootstrap.sh
+./Code/mysimbdp/bootstrap.sh
 ```
 
 ### 5. Start the producers (on your host, not in Docker)
 
 ```bash
-./run_producers.sh
+./Code/mysimbdp/run_producers.sh
 ```
 
 Check they are working:
@@ -105,6 +107,14 @@ Check they are working:
 ```bash
 tail -f logs/tenantA_producer.log
 tail -f logs/tenantB_producer.log
+```
+
+See consumer quey:
+
+```bash
+        docker exec -it broker bash -lc '/opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic tenantA.bronze.raw --from-beginning'
+
+        docker exec -it broker bash -lc '/opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic tenantB.bronze.raw --from-beginning'
 ```
 
 ### 6. Start the streaming workers
@@ -117,10 +127,26 @@ curl -X POST http://localhost:8001/tenants/tenantB/workers/start \
      -H "Content-Type: application/json" -d '{}'
 ```
 
+To stop:
+
+```bash
+curl -X POST http://localhost:8001/tenants/tenantA/workers/stop \
+     -H "Content-Type: application/json" -d '{}'
+
+curl -X POST http://localhost:8001/tenants/tenantB/workers/stop \
+     -H "Content-Type: application/json" -d '{}'
+```
+
 Check workers are running:
 
 ```bash
 docker ps | grep streamingestworker
+```
+
+Stop producers (when needed to stop):
+
+```bash
+    kill $(cat logs/tenantA_producer.pid) $(cat logs/tenantB_producer.pid)
 ```
 
 ### 7. Trigger silver pipelines (don't wait 5 min)
